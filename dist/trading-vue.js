@@ -2925,24 +2925,6 @@ if (true) {
 
 /***/ }),
 
-/***/ 171:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(952);
-if(content.__esModule) content = content.default;
-if(typeof content === 'string') content = [[module.id, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var add = (__webpack_require__(534)/* ["default"] */ .A)
-var update = add("08da5673", content, false, {});
-// Hot Module Replacement
-if(false) {}
-
-/***/ }),
-
 /***/ 179:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
@@ -3353,6 +3335,24 @@ exports.push([module.id, "\n.tvjs-widgets {\r\n    position: absolute;\r\n    z-
 // Exports
 module.exports = exports;
 
+
+/***/ }),
+
+/***/ 288:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(552);
+if(content.__esModule) content = content.default;
+if(typeof content === 'string') content = [[module.id, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = (__webpack_require__(534)/* ["default"] */ .A)
+var update = add("24d59150", content, false, {});
+// Hot Module Replacement
+if(false) {}
 
 /***/ }),
 
@@ -3851,6 +3851,20 @@ function applyToTag (styleElement, obj) {
     styleElement.appendChild(document.createTextNode(css))
   }
 }
+
+
+/***/ }),
+
+/***/ 552:
+/***/ ((module, exports, __webpack_require__) => {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(314);
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.id, "\n.trading-vue-section {\r\n  height: 0;\r\n  position: absolute;\n}\r\n", ""]);
+// Exports
+module.exports = exports;
 
 
 /***/ }),
@@ -4494,20 +4508,6 @@ var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(314);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
 exports.push([module.id, "\n.tvjs-item-list {\r\n    position: absolute;\r\n    user-select: none;\r\n    margin-top: -5px;\n}\n.tvjs-item-list-item {\r\n    display: flex;\r\n    align-items: center;\r\n    padding-right: 20px;\r\n    font-size: 1.15em;\r\n    letter-spacing: 0.05em;\n}\n.tvjs-item-list-item:hover {\r\n    background-color: #76878319;\n}\n.tvjs-item-list-item * {\r\n    position: relative !important;\n}\r\n", ""]);
-// Exports
-module.exports = exports;
-
-
-/***/ }),
-
-/***/ 952:
-/***/ ((module, exports, __webpack_require__) => {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(314);
-exports = ___CSS_LOADER_API_IMPORT___(false);
-// Module
-exports.push([module.id, "\n.trading-vue-section {\r\n  height: 0;\r\n  position: absolute;\n}\r\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -6966,8 +6966,8 @@ var CursorUpdater = /*#__PURE__*/function () {
   }]);
 }();
 /* harmony default export */ const updater = (CursorUpdater);
-;// ./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/Section.vue?vue&type=template&id=e2d33bb4
-var Sectionvue_type_template_id_e2d33bb4_render = function render() {
+;// ./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/Section.vue?vue&type=template&id=b07c6f3a
+var Sectionvue_type_template_id_b07c6f3a_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', [_c('title-chart-legend', {
@@ -7003,7 +7003,7 @@ var Sectionvue_type_template_id_e2d33bb4_render = function render() {
       "legend-button-click": _vm.button_click,
       "on-collapse-change": _vm.collapse_button_click
     }
-  }), _vm._v(" "), _c('div', [_vm._v(_vm._s(_vm.grid_props))]), _vm._v(" "), _c('grid', _vm._b({
+  }), _vm._v(" "), _c('div', [_vm._v(_vm._s(_vm.grid_props.layout.height))]), _vm._v(" "), _c('grid', _vm._b({
     ref: "grid",
     attrs: {
       "grid_id": _vm.grid_id,
@@ -7038,10 +7038,10 @@ var Sectionvue_type_template_id_e2d33bb4_render = function render() {
     }
   }, 'sidebar', _vm.sidebar_props, false))], 1)], 1);
 };
-var Sectionvue_type_template_id_e2d33bb4_staticRenderFns = [];
-Sectionvue_type_template_id_e2d33bb4_render._withStripped = true;
+var Sectionvue_type_template_id_b07c6f3a_staticRenderFns = [];
+Sectionvue_type_template_id_b07c6f3a_render._withStripped = true;
 
-;// ./src/components/Section.vue?vue&type=template&id=e2d33bb4
+;// ./src/components/Section.vue?vue&type=template&id=b07c6f3a
 
 ;// ./src/stuff/frame.js
 
@@ -12977,9 +12977,9 @@ function shaders_arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.
 });
 ;// ./src/components/Section.vue?vue&type=script&lang=js
  /* harmony default export */ const components_Sectionvue_type_script_lang_js = (Sectionvue_type_script_lang_js); 
-// EXTERNAL MODULE: ./node_modules/vue-style-loader/index.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/Section.vue?vue&type=style&index=0&id=e2d33bb4&prod&lang=css
-var Sectionvue_type_style_index_0_id_e2d33bb4_prod_lang_css = __webpack_require__(171);
-;// ./src/components/Section.vue?vue&type=style&index=0&id=e2d33bb4&prod&lang=css
+// EXTERNAL MODULE: ./node_modules/vue-style-loader/index.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/Section.vue?vue&type=style&index=0&id=b07c6f3a&prod&lang=css
+var Sectionvue_type_style_index_0_id_b07c6f3a_prod_lang_css = __webpack_require__(288);
+;// ./src/components/Section.vue?vue&type=style&index=0&id=b07c6f3a&prod&lang=css
 
 ;// ./src/components/Section.vue
 
@@ -12992,8 +12992,8 @@ var Sectionvue_type_style_index_0_id_e2d33bb4_prod_lang_css = __webpack_require_
 
 var Section_component = normalizeComponent(
   components_Sectionvue_type_script_lang_js,
-  Sectionvue_type_template_id_e2d33bb4_render,
-  Sectionvue_type_template_id_e2d33bb4_staticRenderFns,
+  Sectionvue_type_template_id_b07c6f3a_render,
+  Sectionvue_type_template_id_b07c6f3a_staticRenderFns,
   false,
   null,
   null,

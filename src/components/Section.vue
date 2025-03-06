@@ -30,7 +30,7 @@
       @on-collapse-change="collapse_button_click"
     >
     </chart-legend>
-    <div>{{ grid_props }}</div>
+    <div>{{ grid_props.layout.height }}</div>
     <grid
       v-bind="grid_props"
       ref="grid"
