@@ -1,6 +1,6 @@
 <template>
   <!-- Horizontal section: (grid + sidebar) -->
-   <div :style="{ height: grid_props.layout.grids[grid_id].height + 'px' }" class="dynamic-div">
+   <div>
   <title-chart-legend
       ref="legend"
       :values="section_values"
