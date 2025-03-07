@@ -72,7 +72,8 @@ export default {
             ].concat(props.hs || []))
         },
         startResize(event) {
-            console.log("startresize", event);
+            console.log("startresize", event, this._attrs.height);
+            this._attrs.height = this._attrs.height *2
 
         },
         redraw() {

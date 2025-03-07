@@ -7767,7 +7767,8 @@ var Grid = /*#__PURE__*/function () {
       })].concat(props.hs || []));
     },
     startResize: function startResize(event) {
-      console.log("startresize", event);
+      console.log("startresize", event, this._attrs.height);
+      this._attrs.height = this._attrs.height * 2;
     },
     redraw: function redraw() {
       if (!this.renderer) return;
