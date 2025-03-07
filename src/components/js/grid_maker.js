@@ -443,7 +443,7 @@ function GridMaker(id, params, master_grid = null) {
     function grid_y_log_small() {
         self.$_mult = dollar_mult();
         self.ys = [];
-        let q = 1 + (self.$_mult - 1) / 2
+
         if (!sub.length) return;
         const safe_lo = Math.max(self.$_lo, 0.0001); // Ensure we don't get log(0)
         const safe_hi = Math.max(self.$_hi, 0.0001);
@@ -452,7 +452,7 @@ function GridMaker(id, params, master_grid = null) {
         const seenValues = new Set();  // To track unique values
         let count = 0
         while (y$ >= safe_lo) {
-            let roundedValue = parseFloat(Utils.strip(log_rounder(y$, q)).toFixed($p.decimalPlace));  // Round to 3 decimal places
+            let roundedValue = parseFloat(Utils.strip(y$).toFixed($p.decimalPlace));  // Round to 3 decimal places
 
             let y = Math.floor(math.log(y$) * self.A + self.B);
             if (!seenValues.has(roundedValue)) {
@@ -535,8 +535,7 @@ function GridMaker(id, params, master_grid = null) {
                 if (self.$_hi < 1) {
                     grid_y_log_small()
                 } else {
-                    grid_y_log_small()
-                    // grid_y_log()
+                    grid_y_log()
                 }
             } else {
                 grid_y()
