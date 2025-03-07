@@ -196,6 +196,18 @@ export default class Grid {
       args: [this.id, event],
     });
   }
+  remousedown(event) {
+    if (Utils.is_mobile) return;
+    this.propagate("remousedown", event);
+    console.log("remousedown");
+    
+    // this.comp.$emit("cursor-locked", true);
+    // if (event.defaultPrevented) return;
+    // this.comp.$emit("custom-event", {
+    //   event: "grid-mousedown",
+    //   args: [this.id, event],
+    // });
+  }
 
   // Simulated mousedown (for mobile)
   sim_mousedown(event) {

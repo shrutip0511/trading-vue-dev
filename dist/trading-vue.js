@@ -7295,6 +7295,20 @@ var Grid = /*#__PURE__*/function () {
         args: [this.id, event]
       });
     }
+  }, {
+    key: "remousedown",
+    value: function remousedown(event) {
+      if (utils.is_mobile) return;
+      this.propagate("remousedown", event);
+      console.log("remousedown");
+
+      // this.comp.$emit("cursor-locked", true);
+      // if (event.defaultPrevented) return;
+      // this.comp.$emit("custom-event", {
+      //   event: "grid-mousedown",
+      //   args: [this.id, event],
+      // });
+    }
 
     // Simulated mousedown (for mobile)
   }, {
@@ -7734,7 +7748,11 @@ var Grid = /*#__PURE__*/function () {
       }, [id.startsWith('grid-') && id != 'grid-0' && h('div', {
         // Add resize handle conditionally
         "class": "p-divider p-component p-divider-horizontal p-divider-solid p-divider-left overlay-divider ".concat(id),
-        //on: { mousedown: this.startResize },
+        on: {
+          mousedown: function mousedown(e) {
+            return _this2.renderer.remousedown(e);
+          }
+        },
         style: {
           width: '100%',
           // height: '10px',
