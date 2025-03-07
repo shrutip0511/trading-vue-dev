@@ -7732,7 +7732,7 @@ var Grid = /*#__PURE__*/function () {
         }
       }, [id.startsWith('grid-') && id != 'grid-0' && h('div', {
         // Add resize handle conditionally
-        "class": 'p-divider p-component p-divider-horizontal p-divider-solid p-divider-left',
+        "class": "p-divider p-component p-divider-horizontal p-divider-solid p-divider-left ".concat(id),
         //on: { mousedown: this.startResize },
         style: {
           width: '100%',
