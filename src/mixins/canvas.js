@@ -36,6 +36,8 @@ export default {
         create_canvas(h, id, props) {
             this._id = id
             this._attrs = props.attrs
+            console.log(props);
+            
             return h('div', {
                 class: `trading-vue-canvas trading-vue-${id}`,
                 style: {

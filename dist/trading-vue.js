@@ -7723,6 +7723,7 @@ var Grid = /*#__PURE__*/function () {
       var _this2 = this;
       this._id = id;
       this._attrs = props.attrs;
+      console.log(props);
       return h('div', {
         "class": "trading-vue-canvas trading-vue-".concat(id),
         style: {
