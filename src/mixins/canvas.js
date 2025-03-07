@@ -44,20 +44,6 @@ export default {
                     position: 'absolute',
                 }
             }, [
-                h('div', {
-                    class: 'p-divider p-component p-divider-horizontal p-divider-solid p-divider-left',
-                    on: {
-                        //mousedown: this.startResize
-                    },
-                    style: {
-                        width: '100%',
-                        // height: '10px',
-                        // position: 'absolute',
-                        // bottom: '0',
-                        // background: 'gray',
-                        cursor: 'ns-resize'
-                    }
-                }),
                 h('canvas', {
                     on: {
                         mousemove: e => this.renderer.mousemove(e),
