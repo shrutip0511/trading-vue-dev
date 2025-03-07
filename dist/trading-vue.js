@@ -6481,7 +6481,6 @@ function GridMaker(id, params, master_grid) {
   function grid_y_log_small() {
     self.$_mult = dollar_mult();
     self.ys = [];
-    var q = 1 + (self.$_mult - 1) / 2;
     if (!sub.length) return;
     var safe_lo = Math.max(self.$_lo, 0.0001); // Ensure we don't get log(0)
     var safe_hi = Math.max(self.$_hi, 0.0001);
@@ -6489,7 +6488,7 @@ function GridMaker(id, params, master_grid) {
     var seenValues = new Set(); // To track unique values
     var count = 0;
     while (y$ >= safe_lo) {
-      var roundedValue = parseFloat(utils.strip(log_rounder(y$, q)).toFixed($p.decimalPlace)); // Round to 3 decimal places
+      var roundedValue = parseFloat(utils.strip(y$).toFixed($p.decimalPlace)); // Round to 3 decimal places
 
       var y = Math.floor(math.log(y$) * self.A + self.B);
       if (!seenValues.has(roundedValue)) {
