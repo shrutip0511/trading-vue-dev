@@ -6573,7 +6573,8 @@ function GridMaker(id, params, master_grid) {
         if (self.$_hi < 1) {
           grid_y_log_small();
         } else {
-          grid_y_log();
+          grid_y_log_small();
+          // grid_y_log()
         }
       } else {
         grid_y();
