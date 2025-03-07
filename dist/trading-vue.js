@@ -7769,6 +7769,7 @@ var Grid = /*#__PURE__*/function () {
     startResize: function startResize(event) {
       console.log("startresize", event, this._attrs.height);
       this._attrs.height = this._attrs.height * 2;
+      this.setup();
     },
     redraw: function redraw() {
       if (!this.renderer) return;

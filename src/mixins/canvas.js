@@ -74,7 +74,7 @@ export default {
         startResize(event) {
             console.log("startresize", event, this._attrs.height);
             this._attrs.height = this._attrs.height *2
-
+            this.setup()
         },
         redraw() {
             if (!this.renderer) return
