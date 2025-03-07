@@ -46,7 +46,7 @@ export default {
             }, [
                 (id.startsWith('grid-') && id != 'grid-0') && h('div', { // Add resize handle conditionally
                     class: `p-divider p-component p-divider-horizontal p-divider-solid p-divider-left overlay-divider ${id}`,
-                    //on: { mousedown: this.startResize },
+                    on: { mousedown: this.startResize },
                     style: {
                         width: '100%',
                         // height: '10px',
@@ -70,6 +70,10 @@ export default {
                     style: props.style,
                 })
             ].concat(props.hs || []))
+        },
+        startResize(event) {
+            console.log("startresize", event);
+
         },
         redraw() {
             if (!this.renderer) return

@@ -7733,7 +7733,9 @@ var Grid = /*#__PURE__*/function () {
       }, [id.startsWith('grid-') && id != 'grid-0' && h('div', {
         // Add resize handle conditionally
         "class": "p-divider p-component p-divider-horizontal p-divider-solid p-divider-left overlay-divider ".concat(id),
-        //on: { mousedown: this.startResize },
+        on: {
+          mousedown: this.startResize
+        },
         style: {
           width: '100%',
           // height: '10px',
@@ -7763,6 +7765,9 @@ var Grid = /*#__PURE__*/function () {
         ref: 'canvas',
         style: props.style
       })].concat(props.hs || []));
+    },
+    startResize: function startResize(event) {
+      console.log("startresize", event);
     },
     redraw: function redraw() {
       if (!this.renderer) return;
