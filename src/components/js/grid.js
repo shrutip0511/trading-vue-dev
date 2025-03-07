@@ -545,7 +545,7 @@ export default class Grid {
 
   // Propagate mouse event to overlays
   propagate(name, event) {
-    console.log("propagate", name);
+    
     
     for (var layer of this.overlays) {
       if (layer.renderer[name]) {

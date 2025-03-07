@@ -6572,7 +6572,8 @@ function GridMaker(id, params, master_grid) {
         if (self.$_hi < 1) {
           grid_y_log_small();
         } else {
-          grid_y_log();
+          // grid_y_log()
+          grid_y_log_small();
         }
       } else {
         grid_y();
@@ -7660,7 +7661,6 @@ var Grid = /*#__PURE__*/function () {
   }, {
     key: "propagate",
     value: function propagate(name, event) {
-      console.log("propagate", name);
       var _iterator3 = grid_createForOfIteratorHelper(this.overlays),
         _step3;
       try {
