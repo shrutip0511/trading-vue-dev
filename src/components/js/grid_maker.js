@@ -532,7 +532,7 @@ function GridMaker(id, params, master_grid = null) {
             calc_positions()
             grid_x()
             if (grid.logScale) {
-                if (self.$_hi < 1) {
+                if (self.$_hi < 10) {
                     grid_y_log_small()
                 } else {
                     grid_y_log()
