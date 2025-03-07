@@ -7730,7 +7730,20 @@ var Grid = /*#__PURE__*/function () {
           top: props.position.y + 'px',
           position: 'absolute'
         }
-      }, [h('canvas', {
+      }, [h('div', {
+        "class": 'p-divider p-component p-divider-horizontal p-divider-solid p-divider-left',
+        on: {
+          //mousedown: this.startResize
+        },
+        style: {
+          width: '100%',
+          // height: '10px',
+          // position: 'absolute',
+          // bottom: '0',
+          // background: 'gray',
+          cursor: 'ns-resize'
+        }
+      }), h('canvas', {
         on: {
           mousemove: function mousemove(e) {
             return _this2.renderer.mousemove(e);
