@@ -1,9 +1,14 @@
-// Interactive canvas-based component
-// Should implement: mousemove, mouseout, mouseup, mousedown, click
-
+// Interactive canvas-based component with resizable height
 import Utils from '../stuff/utils.js'
 
 export default {
+    data() {
+        return {
+            isResizing: false,
+            startY: 0,
+            startHeight: 0,
+        };
+    },
     methods: {
         setup() {
             const id = `${this.$props.tv_id}-${this._id}-canvas`
@@ -16,16 +21,11 @@ export default {
                 var rect = canvas.getBoundingClientRect()
                 canvas.width = rect.width * dpr
                 canvas.height = rect.height * dpr
-                const ctx = canvas.getContext('2d', {
-                    // TODO: test the boost:
-                    //alpha: false,
-                    //desynchronized: true,
-                    //preserveDrawingBuffer: false
-                })
+                const ctx = canvas.getContext('2d')
                 ctx.scale(dpr, dpr)
                 this.redraw()
-                // Fallback fix for Brave browser
-                // https://github.com/brave/brave-browser/issues/1738
+
+                // Fix for Brave browser
                 if (!ctx.measureTextOrg) {
                     ctx.measureTextOrg = ctx.measureText
                 }
@@ -42,22 +42,61 @@ export default {
                     left: props.position.x + 'px',
                     top: props.position.y + 'px',
                     position: 'absolute',
+                    height: this._attrs.height + 'px',
+                    width: this._attrs.width + 'px',
+                    border: '1px solid black',
+                    resize: 'vertical',
+                    overflow: 'hidden',
                 }
             }, [
                 h('canvas', {
                     on: {
-                        mousemove: e => this.renderer.mousemove(e),
-                        mouseout: e => this.renderer.mouseout(e),
-                        mouseup: e => this.renderer.mouseup(e),
-                        mousedown: e => this.renderer.mousedown(e)
+                        mousemove: e => this.renderer?.mousemove(e),
+                        mouseout: e => this.renderer?.mouseout(e),
+                        mouseup: e => this.renderer?.mouseup(e),
+                        mousedown: e => this.renderer?.mousedown(e)
                     },
                     attrs: Object.assign({
                         id: `${this.$props.tv_id}-${id}-canvas`
                     }, props.attrs),
                     ref: 'canvas',
                     style: props.style,
+                }),
+                // Resizable Handle
+                h('div', {
+                    class: 'resize-handle',
+                    on: {
+                        mousedown: this.startResize
+                    },
+                    style: {
+                        width: '100%',
+                        height: '10px',
+                        position: 'absolute',
+                        bottom: '0',
+                        background: 'gray',
+                        cursor: 'ns-resize'
+                    }
                 })
             ].concat(props.hs || []))
+        },
+        startResize(event) {
+            this.isResizing = true
+            this.startY = event.clientY
+            this.startHeight = this._attrs.height
+            document.addEventListener("mousemove", this.resize)
+            document.addEventListener("mouseup", this.stopResize)
+        },
+        resize(event) {
+            if (this.isResizing) {
+                let newHeight = this.startHeight + (event.clientY - this.startY)
+                this._attrs.height = Math.max(newHeight, 50) // Minimum height
+                this.setup() // Redraw the canvas
+            }
+        },
+        stopResize() {
+            this.isResizing = false
+            document.removeEventListener("mousemove", this.resize)
+            document.removeEventListener("mouseup", this.stopResize)
         },
         redraw() {
             if (!this.renderer) return

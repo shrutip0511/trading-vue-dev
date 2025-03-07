@@ -1,5 +1,5 @@
 /*!
- * TradingVue.JS - v1.0.3 - Thu Mar 06 2025
+ * TradingVue.JS - v1.0.3 - Fri Mar 07 2025
  *     https://github.com/tvjsx/trading-vue-js
  *     Copyright (c) 2019 C451 Code's All Right;
  *     Licensed under the MIT license
@@ -7683,11 +7683,16 @@ var Grid = /*#__PURE__*/function () {
 }();
 
 ;// ./src/mixins/canvas.js
-// Interactive canvas-based component
-// Should implement: mousemove, mouseout, mouseup, mousedown, click
-
+// Interactive canvas-based component with resizable height
 
 /* harmony default export */ const canvas = ({
+  data: function data() {
+    return {
+      isResizing: false,
+      startY: 0,
+      startHeight: 0
+    };
+  },
   methods: {
     setup: function setup() {
       var _this = this;
@@ -7701,16 +7706,11 @@ var Grid = /*#__PURE__*/function () {
         var rect = canvas.getBoundingClientRect();
         canvas.width = rect.width * dpr;
         canvas.height = rect.height * dpr;
-        var ctx = canvas.getContext('2d', {
-          // TODO: test the boost:
-          //alpha: false,
-          //desynchronized: true,
-          //preserveDrawingBuffer: false
-        });
+        var ctx = canvas.getContext('2d');
         ctx.scale(dpr, dpr);
         _this.redraw();
-        // Fallback fix for Brave browser
-        // https://github.com/brave/brave-browser/issues/1738
+
+        // Fix for Brave browser
         if (!ctx.measureTextOrg) {
           ctx.measureTextOrg = ctx.measureText;
         }
@@ -7728,21 +7728,30 @@ var Grid = /*#__PURE__*/function () {
         style: {
           left: props.position.x + 'px',
           top: props.position.y + 'px',
-          position: 'absolute'
+          position: 'absolute',
+          height: this._attrs.height + 'px',
+          width: this._attrs.width + 'px',
+          border: '1px solid black',
+          resize: 'vertical',
+          overflow: 'hidden'
         }
       }, [h('canvas', {
         on: {
           mousemove: function mousemove(e) {
-            return _this2.renderer.mousemove(e);
+            var _this2$renderer;
+            return (_this2$renderer = _this2.renderer) === null || _this2$renderer === void 0 ? void 0 : _this2$renderer.mousemove(e);
           },
           mouseout: function mouseout(e) {
-            return _this2.renderer.mouseout(e);
+            var _this2$renderer2;
+            return (_this2$renderer2 = _this2.renderer) === null || _this2$renderer2 === void 0 ? void 0 : _this2$renderer2.mouseout(e);
           },
           mouseup: function mouseup(e) {
-            return _this2.renderer.mouseup(e);
+            var _this2$renderer3;
+            return (_this2$renderer3 = _this2.renderer) === null || _this2$renderer3 === void 0 ? void 0 : _this2$renderer3.mouseup(e);
           },
           mousedown: function mousedown(e) {
-            return _this2.renderer.mousedown(e);
+            var _this2$renderer4;
+            return (_this2$renderer4 = _this2.renderer) === null || _this2$renderer4 === void 0 ? void 0 : _this2$renderer4.mousedown(e);
           }
         },
         attrs: Object.assign({
@@ -7750,7 +7759,41 @@ var Grid = /*#__PURE__*/function () {
         }, props.attrs),
         ref: 'canvas',
         style: props.style
+      }),
+      // Resizable Handle
+      h('div', {
+        "class": 'resize-handle',
+        on: {
+          mousedown: this.startResize
+        },
+        style: {
+          width: '100%',
+          height: '10px',
+          position: 'absolute',
+          bottom: '0',
+          background: 'gray',
+          cursor: 'ns-resize'
+        }
       })].concat(props.hs || []));
+    },
+    startResize: function startResize(event) {
+      this.isResizing = true;
+      this.startY = event.clientY;
+      this.startHeight = this._attrs.height;
+      document.addEventListener("mousemove", this.resize);
+      document.addEventListener("mouseup", this.stopResize);
+    },
+    resize: function resize(event) {
+      if (this.isResizing) {
+        var newHeight = this.startHeight + (event.clientY - this.startY);
+        this._attrs.height = Math.max(newHeight, 50); // Minimum height
+        this.setup(); // Redraw the canvas
+      }
+    },
+    stopResize: function stopResize() {
+      this.isResizing = false;
+      document.removeEventListener("mousemove", this.resize);
+      document.removeEventListener("mouseup", this.stopResize);
     },
     redraw: function redraw() {
       if (!this.renderer) return;
