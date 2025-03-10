@@ -320,7 +320,7 @@ export default class DCEvents {
             let height = obj.grid.height
             let id = obj.id
             // obj.grid.height = height * 2
-            console.log("overlay_mousedown", height, this.tv.$refs.chart._layout.grids[args[0].height]);
+            console.log("overlay_mousedown", height, this.tv.$refs.chart._layout.grids[args[0]].height);
             this.merge(id, obj)
         }
 
