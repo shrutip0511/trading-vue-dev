@@ -7311,10 +7311,10 @@ var Grid = /*#__PURE__*/function () {
       // console.log("remousedown", this.id, this.$p, this.comp);
 
       if (event.defaultPrevented) return;
-      // this.comp.$emit("custom-event", {
-      //   event: "overlay-mousedown",
-      //   args: [this.id, event],
-      // });
+      this.comp.$emit("custom-event", {
+        event: "overlay-mousedown",
+        args: [this.id, event]
+      });
     }
   }, {
     key: "remousemove",
@@ -16747,6 +16747,7 @@ var DCEvents = /*#__PURE__*/function () {
   }, {
     key: "overlay_mousedown",
     value: function overlay_mousedown(args) {
+      console.log("overlay_mousedown", args, this.tv.$refs.chart.layout);
       var type = Object.keys(this.tv.$refs.chart.layers_meta[args[0]])[0];
       if (type) {
         var obj = this.get(type.split('_')[0])[0];

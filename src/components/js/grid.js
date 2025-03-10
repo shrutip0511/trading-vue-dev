@@ -209,10 +209,10 @@ export default class Grid {
     // console.log("remousedown", this.id, this.$p, this.comp);
     
     if (event.defaultPrevented) return;
-    // this.comp.$emit("custom-event", {
-    //   event: "overlay-mousedown",
-    //   args: [this.id, event],
-    // });
+    this.comp.$emit("custom-event", {
+      event: "overlay-mousedown",
+      args: [this.id, event],
+    });
   }
 
   remousemove(event) {
