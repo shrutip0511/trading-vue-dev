@@ -312,7 +312,7 @@ export default class DCEvents {
     }
 
     overlay_mousedown(args) {
-        console.log("overlay_mousedown",args[0],this.tv.$refs.chart, this.data);
+        console.log("overlay_mousedown",args[0],this.tv.$refs.chart, this.tv.$refs.chart.layers_meta);
         
     }
     grid_mousedown(args) {
