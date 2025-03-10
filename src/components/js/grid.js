@@ -201,6 +201,7 @@ export default class Grid {
     if (Utils.is_mobile) return;
       console.log("resize event remousedown", event);
       this.resize = true;
+      this.propagate("mouseup", this.remouseup(event));
     // this.propagate("mousemove", this.remousemove(event));
     // this.propagate("mouseup", ()=>{
       
@@ -222,6 +223,7 @@ export default class Grid {
     
   }
   remouseup(event) {
+    this.resize = false;
     console.log("resize event remouseup", event);
     
   }
