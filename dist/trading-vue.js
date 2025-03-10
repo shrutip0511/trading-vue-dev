@@ -7122,6 +7122,7 @@ var Grid = /*#__PURE__*/function () {
     this.listeners();
     // }
     this.overlays = [];
+    this.resize = false;
   }
   return createClass_createClass(Grid, [{
     key: "listeners",
@@ -7299,9 +7300,10 @@ var Grid = /*#__PURE__*/function () {
     key: "remousedown",
     value: function remousedown(event) {
       if (utils.is_mobile) return;
+      console.log("resize event remousedown", event);
+      this.resize = true;
       // this.propagate("mousemove", this.remousemove(event));
       // this.propagate("mouseup", ()=>{
-      //   console.log("resize event remouseup");
 
       // });
       // console.log("remousedown", this.id, this.$p, this.comp);
@@ -7315,7 +7317,9 @@ var Grid = /*#__PURE__*/function () {
   }, {
     key: "remousemove",
     value: function remousemove(event) {
-      console.log("resize event remousemove", event);
+      if (this.resize) {
+        console.log("resize event remousemove", event);
+      }
     }
   }, {
     key: "remouseup",

@@ -34,6 +34,7 @@ export default class Grid {
     this.listeners();
     // }
     this.overlays = [];
+    this.resize = false;
   }
 
   listeners() {
@@ -198,9 +199,10 @@ export default class Grid {
   }
   remousedown(event) {
     if (Utils.is_mobile) return;
+      console.log("resize event remousedown", event);
+      this.resize = true;
     // this.propagate("mousemove", this.remousemove(event));
     // this.propagate("mouseup", ()=>{
-    //   console.log("resize event remouseup");
       
     // });
     // console.log("remousedown", this.id, this.$p, this.comp);
@@ -213,7 +215,10 @@ export default class Grid {
   }
 
   remousemove(event) {
-    console.log("resize event remousemove", event);
+    if (this.resize) {
+      console.log("resize event remousemove", event);
+      
+    }
     
   }
   remouseup(event) {
