@@ -7303,11 +7303,11 @@ var Grid = /*#__PURE__*/function () {
       console.log("remousedown", this.id, this.$p, this.comp);
 
       // this.comp.$emit("cursor-locked", true);
-      // if (event.defaultPrevented) return;
-      // this.comp.$emit("custom-event", {
-      //   event: "grid-mousedown",
-      //   args: [this.id, event],
-      // });
+      if (event.defaultPrevented) return;
+      this.comp.$emit("custom-event", {
+        event: "overlay-mousedown",
+        args: [this.id, event]
+      });
     }
 
     // Simulated mousedown (for mobile)
@@ -16429,6 +16429,9 @@ var DCEvents = /*#__PURE__*/function () {
         case 'grid-mousedown':
           this.grid_mousedown(args);
           break;
+        case 'overlay-mousedown':
+          this.overlay_mousedown(args);
+          break;
         case 'drawing-mode-off':
           this.drawing_mode_off();
           break;
@@ -16714,6 +16717,11 @@ var DCEvents = /*#__PURE__*/function () {
           proto[k] = preset[k];
         }
       }
+    }
+  }, {
+    key: "overlay_mousedown",
+    value: function overlay_mousedown(args) {
+      console.log("overlay_mousedown", args[0], this.tv.$refs.chart);
     }
   }, {
     key: "grid_mousedown",

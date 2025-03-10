@@ -202,11 +202,11 @@ export default class Grid {
     console.log("remousedown", this.id, this.$p, this.comp);
     
     // this.comp.$emit("cursor-locked", true);
-    // if (event.defaultPrevented) return;
-    // this.comp.$emit("custom-event", {
-    //   event: "grid-mousedown",
-    //   args: [this.id, event],
-    // });
+    if (event.defaultPrevented) return;
+    this.comp.$emit("custom-event", {
+      event: "overlay-mousedown",
+      args: [this.id, event],
+    });
   }
 
   // Simulated mousedown (for mobile)

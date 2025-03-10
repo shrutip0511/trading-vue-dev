@@ -77,6 +77,8 @@ export default class DCEvents {
                 break
             case 'grid-mousedown': this.grid_mousedown(args)
                 break
+            case 'overlay-mousedown': this.overlay_mousedown(args)
+                break
             case 'drawing-mode-off': this.drawing_mode_off()
                 break
             case 'change-settings': this.change_settings(args)
@@ -309,6 +311,10 @@ export default class DCEvents {
         }
     }
 
+    overlay_mousedown(args) {
+        console.log("overlay_mousedown",args[0],this.tv.$refs.chart);
+        
+    }
     grid_mousedown(args) {
         // TODO: tool state finished?
         this.object_selected([])
