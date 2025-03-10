@@ -57,6 +57,8 @@ function Layout(params) {
         // Refine the height if Math.floor decreased px sum
         sum = hs.reduce((a, b) => a + b, 0)
         for (var i = 0; i < height - sum; i++) hs[i % hs.length]++
+        console.log("weighted_hs", hs);
+        
         return hs
     }
 
