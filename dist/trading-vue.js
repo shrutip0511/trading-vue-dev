@@ -6676,6 +6676,7 @@ function Layout(params) {
       return a + b;
     }, 0);
     for (var i = 0; i < height - sum; i++) hs[i % hs.length]++;
+    console.log("weighted_hs", hs);
     return hs;
   }
   function candles_n_vol() {
