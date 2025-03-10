@@ -314,8 +314,12 @@ export default class DCEvents {
     overlay_mousedown(args) {
         let type = Object.keys(this.tv.$refs.chart.layers_meta[args[0]])[0]
         if (type) {
-            
-            console.log("overlay_mousedown", this.get( type.split('_')[0])[0].grid.height);
+            let obj = this.get(type.split('_')[0])[0]
+            let height = obj.grid.height
+            let id = obj.id
+            obj.grid.height = height * 2
+            console.log("overlay_mousedown", height, id,obj);
+            this.merge(id, obj)
         }
 
     }
@@ -505,7 +509,7 @@ export default class DCEvents {
     // Get overlay by grid-layer id
     get_overlay(obj) {
         console.log("get_overlay", obj);
-        
+
         let id = obj.id || `g${obj.grid_id}_${obj.layer_id}`
         let dcid = obj.uuid || this.gldc[id]
         return this.get_one(`${dcid}`)

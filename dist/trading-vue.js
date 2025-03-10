@@ -16723,7 +16723,12 @@ var DCEvents = /*#__PURE__*/function () {
     value: function overlay_mousedown(args) {
       var type = Object.keys(this.tv.$refs.chart.layers_meta[args[0]])[0];
       if (type) {
-        console.log("overlay_mousedown", this.get(type.split('_')[0])[0].grid.height);
+        var obj = this.get(type.split('_')[0])[0];
+        var height = obj.grid.height;
+        var id = obj.id;
+        obj.grid.height = height * 2;
+        console.log("overlay_mousedown", height, id, obj);
+        this.merge(id, obj);
       }
     }
   }, {
