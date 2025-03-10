@@ -1,5 +1,5 @@
 /*!
- * TradingVue.JS - v1.0.3 - Fri Mar 07 2025
+ * TradingVue.JS - v1.0.3 - Mon Mar 10 2025
  *     https://github.com/tvjsx/trading-vue-js
  *     Copyright (c) 2019 C451 Code's All Right;
  *     Licensed under the MIT license
@@ -7300,7 +7300,7 @@ var Grid = /*#__PURE__*/function () {
     value: function remousedown(event) {
       if (utils.is_mobile) return;
       this.propagate("remousedown", event);
-      console.log("remousedown");
+      console.log("remousedown", this.id);
 
       // this.comp.$emit("cursor-locked", true);
       // if (event.defaultPrevented) return;
