@@ -16723,8 +16723,7 @@ var DCEvents = /*#__PURE__*/function () {
     value: function overlay_mousedown(args) {
       var type = Object.keys(this.tv.$refs.chart.layers_meta[args[0]])[0];
       if (type) {
-        console.log("overlay_mousedown", type.split('_')[0]);
-        console.log(this.get('offchart.MACD'));
+        console.log("overlay_mousedown", this.get(type.split('_')[0]));
       }
     }
   }, {
