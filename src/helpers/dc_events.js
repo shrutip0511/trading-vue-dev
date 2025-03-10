@@ -312,15 +312,15 @@ export default class DCEvents {
     }
 
     overlay_mousedown(args) {
-        console.log("overlay_mousedown", args, this.tv.$refs.chart._layout);
+        // console.log("overlay_mousedown", args, this.tv.$refs.chart._layout);
         
         let type = Object.keys(this.tv.$refs.chart.layers_meta[args[0]])[0]
         if (type) {
             let obj = this.get(type.split('_')[0])[0]
             let height = obj.grid.height
             let id = obj.id
-            obj.grid.height = height * 2
-            console.log("overlay_mousedown", height, id,obj);
+            // obj.grid.height = height * 2
+            console.log("overlay_mousedown", height, this.tv.$refs.chart._layout.grids[args[0].height]);
             this.merge(id, obj)
         }
 
