@@ -16747,7 +16747,7 @@ var DCEvents = /*#__PURE__*/function () {
   }, {
     key: "overlay_mousedown",
     value: function overlay_mousedown(args) {
-      console.log("overlay_mousedown", args, this.tv.$refs.chart.layout);
+      console.log("overlay_mousedown", args, this.tv.$refs.chart);
       var type = Object.keys(this.tv.$refs.chart.layers_meta[args[0]])[0];
       if (type) {
         var obj = this.get(type.split('_')[0])[0];
