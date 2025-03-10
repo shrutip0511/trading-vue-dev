@@ -16721,7 +16721,8 @@ var DCEvents = /*#__PURE__*/function () {
   }, {
     key: "overlay_mousedown",
     value: function overlay_mousedown(args) {
-      console.log("overlay_mousedown", args[0], this.tv.$refs.chart, this.tv.$refs.chart.layers_meta);
+      console.log("overlay_mousedown", args[0], this.tv.$refs.chart, this.tv.$refs.chart.layers_meta[args[0]]);
+      console.log(this.get('offchart.MACD'));
     }
   }, {
     key: "grid_mousedown",
