@@ -198,11 +198,11 @@ export default class Grid {
   }
   remousedown(event) {
     if (Utils.is_mobile) return;
-    this.propagate("mousemove", this.remousemove(event));
-    this.propagate("mouseup", ()=>{
-      console.log("resize event remouseup");
+    // this.propagate("mousemove", this.remousemove(event));
+    // this.propagate("mouseup", ()=>{
+    //   console.log("resize event remouseup");
       
-    });
+    // });
     // console.log("remousedown", this.id, this.$p, this.comp);
     
     if (event.defaultPrevented) return;
@@ -214,6 +214,10 @@ export default class Grid {
 
   remousemove(event) {
     console.log("resize event remousemove", event);
+    
+  }
+  remouseup(event) {
+    console.log("resize event remouseup", event);
     
   }
 

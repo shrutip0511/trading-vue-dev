@@ -7299,10 +7299,11 @@ var Grid = /*#__PURE__*/function () {
     key: "remousedown",
     value: function remousedown(event) {
       if (utils.is_mobile) return;
-      this.propagate("mousemove", this.remousemove(event));
-      this.propagate("mouseup", function () {
-        console.log("resize event remouseup");
-      });
+      // this.propagate("mousemove", this.remousemove(event));
+      // this.propagate("mouseup", ()=>{
+      //   console.log("resize event remouseup");
+
+      // });
       // console.log("remousedown", this.id, this.$p, this.comp);
 
       if (event.defaultPrevented) return;
@@ -7315,6 +7316,11 @@ var Grid = /*#__PURE__*/function () {
     key: "remousemove",
     value: function remousemove(event) {
       console.log("resize event remousemove", event);
+    }
+  }, {
+    key: "remouseup",
+    value: function remouseup(event) {
+      console.log("resize event remouseup", event);
     }
 
     // Simulated mousedown (for mobile)
@@ -7755,6 +7761,12 @@ var Grid = /*#__PURE__*/function () {
         // Add resize handle conditionally
         "class": "p-divider p-component p-divider-horizontal p-divider-solid p-divider-left overlay-divider ".concat(id),
         on: {
+          mousemove: function mousemove(e) {
+            return _this2.renderer.remousemove(e);
+          },
+          mouseup: function mouseup(e) {
+            return _this2.renderer.remouseup(e);
+          },
           mousedown: function mousedown(e) {
             return _this2.renderer.remousedown(e);
           }

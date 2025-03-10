@@ -46,7 +46,11 @@ export default {
             }, [
                 (id.startsWith('grid-') && id != 'grid-0') && h('div', { // Add resize handle conditionally
                     class: `p-divider p-component p-divider-horizontal p-divider-solid p-divider-left overlay-divider ${id}`,
-                    on: { mousedown: e => this.renderer.remousedown(e) },
+                    on: {
+                        mousemove: e => this.renderer.remousemove(e),
+                        mouseup: e => this.renderer.remouseup(e),
+                        mousedown: e => this.renderer.remousedown(e)
+                    },
                     style: {
                         width: '100%',
                         // height: '10px',
