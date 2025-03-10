@@ -312,7 +312,7 @@ export default class DCEvents {
     }
 
     overlay_mousedown(args) {
-        console.log("overlay_mousedown", args, this.tv.$refs.chart);
+        console.log("overlay_mousedown", args, this.tv.$refs.chart._layout);
         
         let type = Object.keys(this.tv.$refs.chart.layers_meta[args[0]])[0]
         if (type) {
