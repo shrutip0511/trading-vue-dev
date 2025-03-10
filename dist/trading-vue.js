@@ -7299,15 +7299,22 @@ var Grid = /*#__PURE__*/function () {
     key: "remousedown",
     value: function remousedown(event) {
       if (utils.is_mobile) return;
-      this.propagate("remousedown", event);
-      console.log("remousedown", this.id, this.$p, this.comp);
-
-      // this.comp.$emit("cursor-locked", true);
-      if (event.defaultPrevented) return;
-      this.comp.$emit("custom-event", {
-        event: "overlay-mousedown",
-        args: [this.id, event]
+      this.propagate("mousemove", this.remousemove(event));
+      this.propagate("mouseup", function () {
+        console.log("resize event remouseup");
       });
+      // console.log("remousedown", this.id, this.$p, this.comp);
+
+      if (event.defaultPrevented) return;
+      // this.comp.$emit("custom-event", {
+      //   event: "overlay-mousedown",
+      //   args: [this.id, event],
+      // });
+    }
+  }, {
+    key: "remousemove",
+    value: function remousemove(event) {
+      console.log("resize event remousemove", event);
     }
 
     // Simulated mousedown (for mobile)
