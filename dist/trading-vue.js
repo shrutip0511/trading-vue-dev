@@ -16721,8 +16721,11 @@ var DCEvents = /*#__PURE__*/function () {
   }, {
     key: "overlay_mousedown",
     value: function overlay_mousedown(args) {
-      console.log("overlay_mousedown", args[0], this.tv.$refs.chart, this.tv.$refs.chart.layers_meta[args[0]]);
-      console.log(this.get('offchart.MACD'));
+      var type = Object.keys(this.tv.$refs.chart.layers_meta[args[0]])[0];
+      if (type) {
+        console.log("overlay_mousedown", type.split('_')[0]);
+        console.log(this.get('offchart.MACD'));
+      }
     }
   }, {
     key: "grid_mousedown",
@@ -16951,6 +16954,7 @@ var DCEvents = /*#__PURE__*/function () {
   }, {
     key: "get_overlay",
     value: function get_overlay(obj) {
+      console.log("get_overlay", obj);
       var id = obj.id || "g".concat(obj.grid_id, "_").concat(obj.layer_id);
       var dcid = obj.uuid || this.gldc[id];
       return this.get_one("".concat(dcid));

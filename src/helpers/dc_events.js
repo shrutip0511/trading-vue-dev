@@ -18,7 +18,7 @@ export default class DCEvents {
             for (var ctrl of this.tv.controllers) {
                 if (ctrl.ww) ctrl.ww(e.data)
             }
-            switch(e.data.type) {
+            switch (e.data.type) {
                 case 'request-data':
                     // TODO: DataTunnel class for smarter data transfer
                     if (this.ww._data_uploading) break
@@ -55,7 +55,7 @@ export default class DCEvents {
 
     // Called when overalay/tv emits 'custom-event'
     on_custom_event(event, args) {
-        switch(event) {
+        switch (event) {
             case 'register-tools': this.register_tools(args)
                 break
             case 'exec-script': this.exec_script(args)
@@ -124,7 +124,7 @@ export default class DCEvents {
 
         if (changed && Object.keys(delta).length) {
             let tf = this.tv.$refs.chart.interval_ms ||
-                     this.data.chart.tf
+                this.data.chart.tf
             let range = this.tv.getRange()
             this.ww.just('update-ov-settings', {
                 delta, tf, range
@@ -148,8 +148,8 @@ export default class DCEvents {
     register_tools(tools) {
         let preset = {}
         for (var tool of this.data.tools || []) {
-             preset[tool.type] = tool
-             delete tool.type
+            preset[tool.type] = tool
+            delete tool.type
         }
         this.tv.$set(this.data, 'tools', [])
         let list = [{
@@ -216,7 +216,7 @@ export default class DCEvents {
             s.$props = Object.keys(args[0].src.props || {})
             this.tv.$set(obj, 'loading', true)
             let tf = this.tv.$refs.chart.interval_ms ||
-                     this.data.chart.tf
+                this.data.chart.tf
             let range = this.tv.getRange()
             if (obj.script && obj.script.output != null) {
                 args[0].output = obj.script.output
@@ -231,7 +231,7 @@ export default class DCEvents {
         if (!this.sett.scripts) return
         this.set_loading(true)
         let tf = this.tv.$refs.chart.interval_ms ||
-                 this.data.chart.tf
+            this.data.chart.tf
         let range = this.tv.getRange()
         this.ww.just('exec-all-scripts', { tf, range })
     }
@@ -252,7 +252,7 @@ export default class DCEvents {
 
         if (Object.keys(delta).length) {
             let tf = this.tv.$refs.chart.interval_ms ||
-                     this.data.chart.tf
+                this.data.chart.tf
             let range = this.tv.getRange()
             this.ww.just('update-ov-settings', {
                 delta, tf, range
@@ -295,7 +295,7 @@ export default class DCEvents {
 
     send_meta_2_ww() {
         let tf = this.tv.$refs.chart.interval_ms ||
-                 this.data.chart.tf
+            this.data.chart.tf
         let range = this.tv.getRange()
         this.ww.just('send-meta-info', { tf, range })
     }
@@ -312,9 +312,13 @@ export default class DCEvents {
     }
 
     overlay_mousedown(args) {
-        console.log("overlay_mousedown",args[0],this.tv.$refs.chart, this.tv.$refs.chart.layers_meta[args[0]]);
-        console.log(this.get('offchart.MACD'));
-        
+        let type = Object.keys(this.tv.$refs.chart.layers_meta[args[0]])[0]
+        if (type) {
+            
+            console.log("overlay_mousedown", type.split('_')[0]);
+            console.log(this.get('offchart.MACD'));
+        }
+
     }
     grid_mousedown(args) {
         // TODO: tool state finished?
@@ -324,7 +328,7 @@ export default class DCEvents {
             .filter(x => x.settings.shiftMode)
             .forEach(x => this.del(x.id))
         if (this.data.tool && this.data.tool !== 'Cursor' &&
-           !this.data.drawingMode) {
+            !this.data.drawingMode) {
             // Prevent from "null" tools (tool created with HODL)
             if (args[1].type !== 'tap') {
                 this.tv.$set(this.data, 'drawingMode', true)
@@ -359,8 +363,8 @@ export default class DCEvents {
         let sett = Object.assign({}, proto.settings || {})
         let data = (proto.data || []).slice()
 
-        if(!('legend' in sett)) sett.legend = false
-        if(!('z-index' in sett)) sett['z-index'] = 100
+        if (!('legend' in sett)) sett.legend = false
+        if (!('z-index' in sett)) sett['z-index'] = 100
         sett.$selected = true
         sett.$state = 'wip'
 
@@ -501,6 +505,8 @@ export default class DCEvents {
 
     // Get overlay by grid-layer id
     get_overlay(obj) {
+        console.log("get_overlay", obj);
+        
         let id = obj.id || `g${obj.grid_id}_${obj.layer_id}`
         let dcid = obj.uuid || this.gldc[id]
         return this.get_one(`${dcid}`)
