@@ -2,17 +2,33 @@
   <!-- Chart components combined together -->
   <div class="trading-vue-chart" :style="styles">
     <keyboard ref="keyboard"></keyboard>
-    <grid-section v-for="(grid, i) in this._layout.grids" :key="grid.id" ref="sec" :common="section_props(i)"
+    <grid-section 
+      v-for="(grid, i) in this._layout.grids" 
+      :key="grid.id" ref="sec" 
+      :common="section_props(i)"        
       :grid_id="i" @register-kb-listener="register_kb" @remove-kb-listener="remove_kb" @range-changed="range_changed"
       @cursor-changed="cursor_changed" @cursor-locked="cursor_locked" @sidebar-transform="set_ytransform"
       @layer-meta-props="layer_meta_props" @custom-event="emit_custom_event" @legend-button-click="legend_button_click"
-      @on-collapse-change="collapse_button_click" :enableZoom="enableZoom"
-      :enableSideBarBoxValue="enableSideBarBoxValue" :decimalPlace="decimalPlace" :legendDecimal="legendDecimal"
-      :applyShaders="applyShaders" :priceLine="priceLine" :enableCrosshair="enableCrosshair" :ignore_OHLC="ignore_OHLC"
-      :tv_id="tv_id" :showTitleChartLegend="showTitleChartLegend" :isOverlayCollapsed="isOverlayCollapsed"
-      :collpaseButton="collpaseButton">
+      @on-collapse-change="collapse_button_click" 
+      :enableZoom="enableZoom"      
+      :enableSideBarBoxValue="enableSideBarBoxValue" 
+      :decimalPlace="decimalPlace" 
+      :legendDecimal="legendDecimal"      
+      :applyShaders="applyShaders" 
+      :priceLine="priceLine" 
+      :enableCrosshair="enableCrosshair" 
+      :ignore_OHLC="ignore_OHLC"      
+      :tv_id="tv_id" 
+      :showTitleChartLegend="showTitleChartLegend" 
+      :isOverlayCollapsed="isOverlayCollapsed"      
+      :collpaseButton="collpaseButton"
+    >
     </grid-section>
-    <botbar v-bind="botbar_props" :shaders="shaders" :timezone="timezone">
+    <botbar 
+      v-bind="botbar_props" 
+      :shaders="shaders" 
+      :timezone="timezone"
+    >
     </botbar>
   </div>
 </template>

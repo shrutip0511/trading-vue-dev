@@ -1,54 +1,94 @@
 <template>
   <!-- Main component  -->
-  <div :id="id" class="trading-vue" :style="{
-    color: this.chart_props.colors.text,
-    font: this.font_comp,
-    width: this.width + 'px',
-    height: this.height + 'px',
-  }" @mousedown="mousedown" @mouseleave="mouseleave">
-    <toolbar v-if="toolbar" ref="toolbar" v-bind="chart_props" :config="chart_config" @custom-event="custom_event">
+  <div :id="id" class="trading-vue" 
+    :style="{
+      color: this.chart_props.colors.text,
+      font: this.font_comp,
+      width: this.width + 'px',
+      height: this.height + 'px',
+    }" 
+    @mousedown="mousedown" 
+    @mouseleave="mouseleave"
+  >
+    <toolbar 
+      v-if="toolbar" 
+      ref="toolbar" 
+      v-bind="chart_props" 
+      :config="chart_config" 
+      @custom-event="custom_event"
+    >
     </toolbar>
     
-      <title-legend-chart
-        ref="legend"
-        :values="section_values"
-        :decimalPlace="decimalPlace"
-        :legendDecimal="legendDecimal"
-        :grid_id="0"
-        :common="main_section_legend_props"
-        :meta_props="layer_meta_values"
-        :showTitleChartLegend="showTitleChartLegend"
-      >
+    <title-legend-chart
+      ref="legend"
+      :values="section_values"
+      :decimalPlace="decimalPlace"
+      :legendDecimal="legendDecimal"
+      :grid_id="0"
+      :common="main_section_legend_props"
+      :meta_props="layer_meta_values"
+      v-if="showTitleChartLegend"
+    >
+    </title-legend-chart>
 
-      </title-legend-chart>
-
-    <widgets v-if="controllers.length" ref="widgets" :map="ws" :width="width" :height="height" :tv="this" :dc="data">
+    <widgets 
+      v-if="controllers.length" 
+      ref="widgets" 
+      :map="ws" 
+      :width="width" 
+      :height="height" 
+      :tv="this" 
+      :dc="data"
+    >
     </widgets>
-    <chart :enableZoom="enableZoom" :showTitleChartLegend="showTitleChartLegend"
-      :isOverlayCollapsed="isOverlayCollapsed" :collpaseButton="collpaseButton"
-      :enableSideBarBoxValue="enableSideBarBoxValue" :applyShaders="applyShaders" :priceLine="priceLine"
-      :decimalPlace="decimalPlace" :legendDecimal="legendDecimal" :enableCrosshair="enableCrosshair"
-      :ignoreNegativeIndex="ignoreNegativeIndex" :ignore_OHLC="ignore_OHLC" :key="reset" ref="chart"
-      v-bind="chart_props" :tv_id="id" :config="chart_config" @custom-event="custom_event"
-      @range-changed="range_changed" @chart_data_changed="chart_data_changed" @sidebar-transform="sidebar_transform"
-      @legend-button-click="legend_button" @on-collapse-change="collapse_button" 
-      @updateSection="updateSection" @updateMeta="updateMeta" @updateLayerMeta="updateLayerMeta" @updateCursorMode="updateCursorMode" >
+
+    <chart 
+      :enableZoom="enableZoom" 
+      :showTitleChartLegend="showTitleChartLegend"        
+      :isOverlayCollapsed="isOverlayCollapsed" 
+      :collpaseButton="collpaseButton"      
+      :enableSideBarBoxValue="enableSideBarBoxValue" 
+      :applyShaders="applyShaders" 
+      :priceLine="priceLine"      
+      :decimalPlace="decimalPlace" 
+      :legendDecimal="legendDecimal" 
+      :enableCrosshair="enableCrosshair"      
+      :ignoreNegativeIndex="ignoreNegativeIndex" 
+      :ignore_OHLC="ignore_OHLC" 
+      :key="reset" ref="chart"
+      v-bind="chart_props" 
+      :tv_id="id" 
+      :config="chart_config" 
+      @custom-event="custom_event"      
+      @range-changed="range_changed" 
+      @chart_data_changed="chart_data_changed" 
+      @sidebar-transform="sidebar_transform"      
+      @legend-button-click="legend_button" 
+      @on-collapse-change="collapse_button"       
+      @updateSection="updateSection" 
+      @updateMeta="updateMeta" 
+      @updateLayerMeta="updateLayerMeta" 
+      @updateCursorMode="updateCursorMode" 
+    >
     </chart>
     <transition name="tvjs-drift">
-      <the-tip v-if="tip" :data="tip" @remove-me="tip = null" />
+      <the-tip 
+        v-if="tip" 
+        :data="tip" 
+        @remove-me="tip = null" 
+      />
     </transition>
   </div>
 </template>
 
 <script>
-import Const from "./stuff/constants.js";
 import Chart from "./components/Chart.vue";
+import TheTip from "./components/TheTip.vue";
+import TitleLegendChart from './components/TitleLegend.vue';
 import Toolbar from "./components/Toolbar.vue";
 import Widgets from "./components/Widgets.vue";
-import TheTip from "./components/TheTip.vue";
 import XControl from "./mixins/xcontrol.js";
-import IndexedArray from 'arrayslicer'
-import TitleLegendChart from './components/TitleLegendChart.vue'
+import Const from "./stuff/constants.js";
 
 export default {
   name: "TradingVue",
@@ -269,7 +309,14 @@ export default {
     },
   },
   data() {
-    return { reset: 0, tip: null, section_values: null, meta_values: null, layer_meta_values: null, cursor_mode:null };
+    return { 
+      reset: 0, 
+      tip: null, 
+      section_values: null, 
+      meta_values: null, 
+      layer_meta_values: null, 
+      cursor_mode:null 
+    };
   },
   computed: {
     // Copy a subset of TradingVue props
