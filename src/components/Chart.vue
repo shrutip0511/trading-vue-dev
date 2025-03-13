@@ -229,7 +229,32 @@ export default {
         })
       },
       deep: true
-    }
+    },
+    cursor: {
+      handler: function (newVal, p) {
+        if (newVal.values[0]) {
+          this.$emit("updateSection", newVal.values[0]);
+        }
+        if (newVal.mode) {
+          this.$emit("updateCursorMode", newVal.mode);
+        }
+      },
+      deep: true
+    },
+    layers_meta: {
+      handler: function (newVal, p) {
+        if (newVal[0]) {
+          this.$emit("updateLayerMeta", newVal[0]);
+        }
+      },
+      deep: true
+    },
+    meta: {
+      handler: function (newVal, p) {
+        this.$emit("updateMeta", newVal);
+      },
+      deep: true
+    },
   },
   created() {
 
