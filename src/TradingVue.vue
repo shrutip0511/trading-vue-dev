@@ -1,38 +1,95 @@
 <template>
   <!-- Main component  -->
-  <div :id="id" class="trading-vue" :style="{
-    color: this.chart_props.colors.text,
-    font: this.font_comp,
-    width: this.width + 'px',
-    height: this.height + 'px',
-  }" @mousedown="mousedown" @mouseleave="mouseleave">
-    <toolbar v-if="toolbar" ref="toolbar" v-bind="chart_props" :config="chart_config" @custom-event="custom_event">
+  <div :id="id" class="trading-vue" 
+    :style="{
+      color: this.chart_props.colors.text,
+      font: this.font_comp,
+      width: this.width + 'px',
+      height: this.height + 'px',
+    }" 
+    @mousedown="mousedown" 
+    @mouseleave="mouseleave"
+  >
+    <toolbar 
+      v-if="toolbar" 
+      ref="toolbar" 
+      v-bind="chart_props" 
+      :config="chart_config" 
+      @custom-event="custom_event"
+    >
     </toolbar>
-    <widgets v-if="controllers.length" ref="widgets" :map="ws" :width="width" :height="height" :tv="this" :dc="data">
+    
+    <title-legend-chart
+      ref="legend"
+      :values="section_values"
+      :decimalPlace="decimalPlace"
+      :legendDecimal="legendDecimal"
+      :grid_id="0"
+      :common="main_section_legend_props"
+      :meta_props="layer_meta_values"
+      v-if="showTitleChartLegend"
+    >
+    </title-legend-chart>
+
+    <widgets 
+      v-if="controllers.length" 
+      ref="widgets" 
+      :map="ws" 
+      :width="width" 
+      :height="height" 
+      :tv="this" 
+      :dc="data"
+    >
     </widgets>
-    <chart :enableZoom="enableZoom" :showTitleChartLegend="showTitleChartLegend"
-      :isOverlayCollapsed="isOverlayCollapsed" :collpaseButton="collpaseButton"
-      :enableSideBarBoxValue="enableSideBarBoxValue" :applyShaders="applyShaders" :priceLine="priceLine"
-      :decimalPlace="decimalPlace" :legendDecimal="legendDecimal" :enableCrosshair="enableCrosshair"
-      :ignoreNegativeIndex="ignoreNegativeIndex" :ignore_OHLC="ignore_OHLC" :key="reset" ref="chart"
-      v-bind="chart_props" :tv_id="id" :config="chart_config" @custom-event="custom_event"
-      @range-changed="range_changed" @chart_data_changed="chart_data_changed" @sidebar-transform="sidebar_transform"
-      @legend-button-click="legend_button" @on-collapse-change="collapse_button">
+
+    <chart 
+      :enableZoom="enableZoom" 
+      :showTitleChartLegend="showTitleChartLegend"        
+      :isOverlayCollapsed="isOverlayCollapsed" 
+      :collpaseButton="collpaseButton"      
+      :enableSideBarBoxValue="enableSideBarBoxValue" 
+      :applyShaders="applyShaders" 
+      :priceLine="priceLine"      
+      :decimalPlace="decimalPlace" 
+      :legendDecimal="legendDecimal" 
+      :enableCrosshair="enableCrosshair"      
+      :ignoreNegativeIndex="ignoreNegativeIndex" 
+      :ignore_OHLC="ignore_OHLC" 
+      :key="reset" ref="chart"
+      v-bind="chart_props" 
+      :tv_id="id" 
+      :config="chart_config" 
+      @custom-event="custom_event"      
+      @range-changed="range_changed" 
+      @chart_data_changed="chart_data_changed" 
+      @sidebar-transform="sidebar_transform"      
+      @legend-button-click="legend_button" 
+      @on-collapse-change="collapse_button"       
+      @updateSection="updateSection" 
+      @updateMeta="updateMeta" 
+      @updateLayerMeta="updateLayerMeta" 
+      @updateCursorMode="updateCursorMode" 
+    >
     </chart>
     <transition name="tvjs-drift">
-      <the-tip v-if="tip" :data="tip" @remove-me="tip = null" />
+      <the-tip 
+        v-if="tip" 
+        :data="tip" 
+        @remove-me="tip = null" 
+      />
     </transition>
   </div>
 </template>
 
 <script>
-import Const from "./stuff/constants.js";
 import Chart from "./components/Chart.vue";
+import TheTip from "./components/TheTip.vue";
+import TitleLegendChart from './components/TitleLegend.vue';
 import Toolbar from "./components/Toolbar.vue";
 import Widgets from "./components/Widgets.vue";
-import TheTip from "./components/TheTip.vue";
 import XControl from "./mixins/xcontrol.js";
-import IndexedArray from 'arrayslicer'
+import Const from "./stuff/constants.js";
+
 export default {
   name: "TradingVue",
   components: {
@@ -40,6 +97,7 @@ export default {
     Toolbar,
     Widgets,
     TheTip,
+    TitleLegendChart
   },
   mixins: [XControl],
   props: {
@@ -251,7 +309,14 @@ export default {
     },
   },
   data() {
-    return { reset: 0, tip: null };
+    return { 
+      reset: 0, 
+      tip: null, 
+      section_values: null, 
+      meta_values: null, 
+      layer_meta_values: null, 
+      cursor_mode:null 
+    };
   },
   computed: {
     // Copy a subset of TradingVue props
@@ -313,13 +378,57 @@ export default {
     },
     auto_y_axis() {
       return this.$refs.chart?.auto_y_axis || true
-    }
+    },
+
+
+    main_section_legend_props() {
+      const id = 0;
+      let p = Object.assign({});
+      p.colors = this.chart_props.colors
+      p.title_txt = this.decubed.chart.name || this.$props.titleTxt
+      p.exchange_txt = this.$props.exchangeTxt
+
+      let res = [];
+      let showLegendPropsData = [];
+      let legendTxtConfig = localStorage.getItem('legendTxtConfig')
+      let showLegendProps = localStorage.getItem('showLegendProps')
+      if (this.ignore_OHLC && legendTxtConfig) {
+        res = JSON.parse(legendTxtConfig)
+      }
+      if (showLegendProps) {
+        showLegendPropsData = JSON.parse(showLegendProps)
+        if (Array.isArray(showLegendPropsData) && showLegendPropsData.length > 0) {
+          p.showLegendPropsData = showLegendPropsData
+        }
+      }
+
+      let chartType = this.decubed.chart.type || 'Candles'
+      let show_CustomProps = this.ignore_OHLC.includes(chartType)
+      p.legendTxtConfig = res
+      p.show_CustomProps = show_CustomProps
+      p.chartType = chartType
+      p.meta = this.meta_values
+      p.cursor_mode = this.cursor_mode
+      return p;
+    },
   },
   beforeDestroy() {
     this.custom_event({ event: "before-destroy" });
     this.ctrl_destroy();
   },
   methods: {
+    updateSection(value) {
+      this.section_values = value;
+    },
+    updateMeta(value) {
+      this.meta_values = value;
+    },
+    updateLayerMeta(value) {
+      this.layer_meta_values = value;
+    },
+    updateCursorMode(value) {
+      this.cursor_mode = value;
+    },
     chart_data_changed(flag) {
       this.$emit("chart_data_changed", flag);
     },
