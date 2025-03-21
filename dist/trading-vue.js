@@ -278,6 +278,20 @@ IndexedArray.prototype.getRange = function (begin, end) {
 
 /***/ }),
 
+/***/ 108:
+/***/ ((module, exports, __webpack_require__) => {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(314);
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.id, "\n.t-vue-lbtn {\r\n    z-index: 100;\r\n    pointer-events: all;\r\n    cursor: pointer;\n}\r\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+
 /***/ 168:
 /***/ ((module, exports, __webpack_require__) => {
 
@@ -2939,20 +2953,6 @@ module.exports = exports;
 
 /***/ }),
 
-/***/ 214:
-/***/ ((module, exports, __webpack_require__) => {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(314);
-exports = ___CSS_LOADER_API_IMPORT___(false);
-// Module
-exports.push([module.id, "\n.t-vue-lbtn {\r\n    z-index: 100;\r\n    pointer-events: all;\r\n    cursor: pointer;\n}\r\n", ""]);
-// Exports
-module.exports = exports;
-
-
-/***/ }),
-
 /***/ 215:
 /***/ ((module, exports, __webpack_require__) => {
 
@@ -3316,24 +3316,6 @@ if (typeof window.define === 'function' && window.define.amd) {
 
 /***/ }),
 
-/***/ 243:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(214);
-if(content.__esModule) content = content.default;
-if(typeof content === 'string') content = [[module.id, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var add = (__webpack_require__(534)/* ["default"] */ .A)
-var update = add("ed0d0662", content, false, {});
-// Hot Module Replacement
-if(false) {}
-
-/***/ }),
-
 /***/ 260:
 /***/ ((module, exports, __webpack_require__) => {
 
@@ -3576,6 +3558,24 @@ if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
 var add = (__webpack_require__(534)/* ["default"] */ .A)
 var update = add("85e1d57a", content, false, {});
+// Hot Module Replacement
+if(false) {}
+
+/***/ }),
+
+/***/ 477:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(108);
+if(content.__esModule) content = content.default;
+if(typeof content === 'string') content = [[module.id, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = (__webpack_require__(534)/* ["default"] */ .A)
+var update = add("97714162", content, false, {});
 // Hot Module Replacement
 if(false) {}
 
@@ -12115,12 +12115,12 @@ ButtonGroupvue_type_template_id_72b6dd45_render._withStripped = true;
 
 ;// ./src/components/ButtonGroup.vue?vue&type=template&id=72b6dd45
 
-;// ./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/LegendButton.vue?vue&type=template&id=3efc519e
-var LegendButtonvue_type_template_id_3efc519e_render = function render() {
+;// ./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/LegendButton.vue?vue&type=template&id=35d53634
+var LegendButtonvue_type_template_id_35d53634_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("img", {
-    "class": "t-vue-lbtn-".concat(_vm.icon, "-").concat(_vm.ov),
+    "class": "t-vue-lbtn",
     style: {
       width: _vm.config.L_BTN_SIZE + "px",
       height: _vm.config.L_BTN_SIZE + "px"
@@ -12134,10 +12134,10 @@ var LegendButtonvue_type_template_id_3efc519e_render = function render() {
     }
   });
 };
-var LegendButtonvue_type_template_id_3efc519e_staticRenderFns = [];
-LegendButtonvue_type_template_id_3efc519e_render._withStripped = true;
+var LegendButtonvue_type_template_id_35d53634_staticRenderFns = [];
+LegendButtonvue_type_template_id_35d53634_render._withStripped = true;
 
-;// ./src/components/LegendButton.vue?vue&type=template&id=3efc519e
+;// ./src/components/LegendButton.vue?vue&type=template&id=35d53634
 
 ;// ./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/LegendButton.vue?vue&type=script&lang=js
 
@@ -12146,6 +12146,7 @@ LegendButtonvue_type_template_id_3efc519e_render._withStripped = true;
   props: ['id', 'tv_id', 'grid_id', 'ov_id', 'index', 'display', 'icon', 'config'],
   computed: {
     base64: function base64() {
+      console.log("file name", this.file_name);
       return this.icon || icons_namespaceObject[this.file_name];
     },
     file_name: function file_name() {
@@ -12183,9 +12184,9 @@ LegendButtonvue_type_template_id_3efc519e_render._withStripped = true;
 });
 ;// ./src/components/LegendButton.vue?vue&type=script&lang=js
  /* harmony default export */ const components_LegendButtonvue_type_script_lang_js = (LegendButtonvue_type_script_lang_js); 
-// EXTERNAL MODULE: ./node_modules/vue-style-loader/index.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/LegendButton.vue?vue&type=style&index=0&id=3efc519e&prod&lang=css
-var LegendButtonvue_type_style_index_0_id_3efc519e_prod_lang_css = __webpack_require__(243);
-;// ./src/components/LegendButton.vue?vue&type=style&index=0&id=3efc519e&prod&lang=css
+// EXTERNAL MODULE: ./node_modules/vue-style-loader/index.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/LegendButton.vue?vue&type=style&index=0&id=35d53634&prod&lang=css
+var LegendButtonvue_type_style_index_0_id_35d53634_prod_lang_css = __webpack_require__(477);
+;// ./src/components/LegendButton.vue?vue&type=style&index=0&id=35d53634&prod&lang=css
 
 ;// ./src/components/LegendButton.vue
 
@@ -12198,8 +12199,8 @@ var LegendButtonvue_type_style_index_0_id_3efc519e_prod_lang_css = __webpack_req
 
 var LegendButton_component = normalizeComponent(
   components_LegendButtonvue_type_script_lang_js,
-  LegendButtonvue_type_template_id_3efc519e_render,
-  LegendButtonvue_type_template_id_3efc519e_staticRenderFns,
+  LegendButtonvue_type_template_id_35d53634_render,
+  LegendButtonvue_type_template_id_35d53634_staticRenderFns,
   false,
   null,
   null,

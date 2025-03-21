@@ -2,7 +2,7 @@
 <!--              margin: config.L_BTN_MARGIN
 -->
 
-    <img :id="uuid" :class="`t-vue-lbtn-${icon}-${ov}`"
+    <img :id="uuid" :class="`t-vue-lbtn`"
         :src="base64" :style="{
             width: config.L_BTN_SIZE + 'px',
             height: config.L_BTN_SIZE + 'px'
@@ -19,6 +19,8 @@ export default {
             'icon', 'config'],
     computed: {
         base64() {
+            console.log("file name", this.file_name);
+            
             return this.icon || Icons[this.file_name]
         },
         file_name() {
