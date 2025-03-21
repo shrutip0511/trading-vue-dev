@@ -2,7 +2,7 @@
 <!--              margin: config.L_BTN_MARGIN
 -->
 
-    <img :id="uuid" :class="`t-vue-lbtn-${file_name}-${ov_class}`"
+    <img :id="uuid" :class="`t-vue-lbtn ${ov_class}`"
         :src="base64" :style="{
             width: config.L_BTN_SIZE + 'px',
             height: config.L_BTN_SIZE + 'px'
@@ -37,9 +37,9 @@ export default {
             return `${tv}-btn-g${gr}-${ov}`
         },
         ov_class() {
-            
-            let ov = this.$props.ov_id
-            return `${ov}`
+            let type = this.file_name?.split('.')[0]
+            let ov = this.$props.ov_id?.split('_')[0]
+            return `${type}-${ov}`
         },
         data_type() {
             return this.$props.grid_id === 0 ?

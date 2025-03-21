@@ -278,6 +278,20 @@ IndexedArray.prototype.getRange = function (begin, end) {
 
 /***/ }),
 
+/***/ 81:
+/***/ ((module, exports, __webpack_require__) => {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(314);
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.id, "\n.t-vue-lbtn {\r\n    z-index: 100;\r\n    pointer-events: all;\r\n    cursor: pointer;\n}\r\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+
 /***/ 168:
 /***/ ((module, exports, __webpack_require__) => {
 
@@ -4217,20 +4231,6 @@ module.exports = _regeneratorRuntime, module.exports.__esModule = true, module.e
 
 /***/ }),
 
-/***/ 675:
-/***/ ((module, exports, __webpack_require__) => {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(314);
-exports = ___CSS_LOADER_API_IMPORT___(false);
-// Module
-exports.push([module.id, "\n.t-vue-lbtn {\r\n    z-index: 100;\r\n    pointer-events: all;\r\n    cursor: pointer;\n}\r\n", ""]);
-// Exports
-module.exports = exports;
-
-
-/***/ }),
-
 /***/ 686:
 /***/ ((module, exports, __webpack_require__) => {
 
@@ -4290,24 +4290,6 @@ function _typeof(o) {
   }, module.exports.__esModule = true, module.exports["default"] = module.exports, _typeof(o);
 }
 module.exports = _typeof, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 746:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(675);
-if(content.__esModule) content = content.default;
-if(typeof content === 'string') content = [[module.id, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var add = (__webpack_require__(534)/* ["default"] */ .A)
-var update = add("5abb9180", content, false, {});
-// Hot Module Replacement
-if(false) {}
 
 /***/ }),
 
@@ -4525,6 +4507,24 @@ exports.push([module.id, "\n.tvjs-drift-enter-active {\r\n    transition: all .3
 // Exports
 module.exports = exports;
 
+
+/***/ }),
+
+/***/ 968:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(81);
+if(content.__esModule) content = content.default;
+if(typeof content === 'string') content = [[module.id, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = (__webpack_require__(534)/* ["default"] */ .A)
+var update = add("06915a68", content, false, {});
+// Hot Module Replacement
+if(false) {}
 
 /***/ }),
 
@@ -12115,12 +12115,12 @@ ButtonGroupvue_type_template_id_72b6dd45_render._withStripped = true;
 
 ;// ./src/components/ButtonGroup.vue?vue&type=template&id=72b6dd45
 
-;// ./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/LegendButton.vue?vue&type=template&id=2e0cb1c6
-var LegendButtonvue_type_template_id_2e0cb1c6_render = function render() {
+;// ./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/LegendButton.vue?vue&type=template&id=3915856c
+var LegendButtonvue_type_template_id_3915856c_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("img", {
-    "class": "t-vue-lbtn-".concat(_vm.file_name, "-").concat(_vm.ov_class),
+    "class": "t-vue-lbtn ".concat(_vm.ov_class),
     style: {
       width: _vm.config.L_BTN_SIZE + "px",
       height: _vm.config.L_BTN_SIZE + "px"
@@ -12134,10 +12134,10 @@ var LegendButtonvue_type_template_id_2e0cb1c6_render = function render() {
     }
   });
 };
-var LegendButtonvue_type_template_id_2e0cb1c6_staticRenderFns = [];
-LegendButtonvue_type_template_id_2e0cb1c6_render._withStripped = true;
+var LegendButtonvue_type_template_id_3915856c_staticRenderFns = [];
+LegendButtonvue_type_template_id_3915856c_render._withStripped = true;
 
-;// ./src/components/LegendButton.vue?vue&type=template&id=2e0cb1c6
+;// ./src/components/LegendButton.vue?vue&type=template&id=3915856c
 
 ;// ./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/LegendButton.vue?vue&type=script&lang=js
 
@@ -12163,8 +12163,10 @@ LegendButtonvue_type_template_id_2e0cb1c6_render._withStripped = true;
       return "".concat(tv, "-btn-g").concat(gr, "-").concat(ov);
     },
     ov_class: function ov_class() {
-      var ov = this.$props.ov_id;
-      return "".concat(ov);
+      var _this$file_name, _this$$props$ov_id;
+      var type = (_this$file_name = this.file_name) === null || _this$file_name === void 0 ? void 0 : _this$file_name.split('.')[0];
+      var ov = (_this$$props$ov_id = this.$props.ov_id) === null || _this$$props$ov_id === void 0 ? void 0 : _this$$props$ov_id.split('_')[0];
+      return "".concat(type, "-").concat(ov);
     },
     data_type: function data_type() {
       return this.$props.grid_id === 0 ? 'onchart' : 'offchart';
@@ -12188,9 +12190,9 @@ LegendButtonvue_type_template_id_2e0cb1c6_render._withStripped = true;
 });
 ;// ./src/components/LegendButton.vue?vue&type=script&lang=js
  /* harmony default export */ const components_LegendButtonvue_type_script_lang_js = (LegendButtonvue_type_script_lang_js); 
-// EXTERNAL MODULE: ./node_modules/vue-style-loader/index.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/LegendButton.vue?vue&type=style&index=0&id=2e0cb1c6&prod&lang=css
-var LegendButtonvue_type_style_index_0_id_2e0cb1c6_prod_lang_css = __webpack_require__(746);
-;// ./src/components/LegendButton.vue?vue&type=style&index=0&id=2e0cb1c6&prod&lang=css
+// EXTERNAL MODULE: ./node_modules/vue-style-loader/index.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/LegendButton.vue?vue&type=style&index=0&id=3915856c&prod&lang=css
+var LegendButtonvue_type_style_index_0_id_3915856c_prod_lang_css = __webpack_require__(968);
+;// ./src/components/LegendButton.vue?vue&type=style&index=0&id=3915856c&prod&lang=css
 
 ;// ./src/components/LegendButton.vue
 
@@ -12203,8 +12205,8 @@ var LegendButtonvue_type_style_index_0_id_2e0cb1c6_prod_lang_css = __webpack_req
 
 var LegendButton_component = normalizeComponent(
   components_LegendButtonvue_type_script_lang_js,
-  LegendButtonvue_type_template_id_2e0cb1c6_render,
-  LegendButtonvue_type_template_id_2e0cb1c6_staticRenderFns,
+  LegendButtonvue_type_template_id_3915856c_render,
+  LegendButtonvue_type_template_id_3915856c_staticRenderFns,
   false,
   null,
   null,
