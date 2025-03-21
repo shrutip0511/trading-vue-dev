@@ -1,5 +1,5 @@
 /*!
- * TradingVue.JS - v1.0.3 - Thu Mar 13 2025
+ * TradingVue.JS - v1.0.3 - Fri Mar 21 2025
  *     https://github.com/tvjsx/trading-vue-js
  *     Copyright (c) 2019 C451 Code's All Right;
  *     Licensed under the MIT license
@@ -2925,24 +2925,6 @@ if (true) {
 
 /***/ }),
 
-/***/ 179:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(554);
-if(content.__esModule) content = content.default;
-if(typeof content === 'string') content = [[module.id, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var add = (__webpack_require__(534)/* ["default"] */ .A)
-var update = add("3f4f243d", content, false, {});
-// Hot Module Replacement
-if(false) {}
-
-/***/ }),
-
 /***/ 208:
 /***/ ((module, exports, __webpack_require__) => {
 
@@ -2951,6 +2933,20 @@ var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(314);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
 exports.push([module.id, "\n.trading-vue-tbitem {\n}\n.trading-vue-tbitem:hover {\r\n    background-color: #76878319;\n}\n.trading-vue-tbitem-exp {\r\n    position: absolute;\r\n    right: -3px;\r\n    padding: 18.5px 5px;\r\n    font-stretch: extra-condensed;\r\n    transform: scaleX(0.6);\r\n    font-size: 0.6em;\r\n    opacity: 0.0;\r\n    user-select: none;\r\n    line-height: 0;\n}\n.trading-vue-tbitem:hover\r\n.trading-vue-tbitem-exp {\r\n    opacity: 0.5;\n}\n.trading-vue-tbitem-exp:hover {\r\n    background-color: #76878330;\r\n    opacity: 0.9 !important;\n}\n.trading-vue-tbicon {\r\n    position: absolute;\n}\n.trading-vue-tbitem.selected-item > .trading-vue-tbicon,\r\n.tvjs-item-list-item.selected-item > .trading-vue-tbicon {\r\n     filter: brightness(1.45) sepia(1) hue-rotate(90deg) saturate(4.5) !important;\n}\n.tvjs-pixelated {\r\n    -ms-interpolation-mode: nearest-neighbor;\r\n    image-rendering: -webkit-optimize-contrast;\r\n    image-rendering: -webkit-crisp-edges;\r\n    image-rendering: -moz-crisp-edges;\r\n    image-rendering: -o-crisp-edges;\r\n    image-rendering: pixelated;\n}\r\n\r\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+
+/***/ 214:
+/***/ ((module, exports, __webpack_require__) => {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(314);
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.id, "\n.t-vue-lbtn {\r\n    z-index: 100;\r\n    pointer-events: all;\r\n    cursor: pointer;\n}\r\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -3317,6 +3313,24 @@ if (typeof window.define === 'function' && window.define.amd) {
 
 })(window, window.document);
 
+
+/***/ }),
+
+/***/ 243:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(214);
+if(content.__esModule) content = content.default;
+if(typeof content === 'string') content = [[module.id, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = (__webpack_require__(534)/* ["default"] */ .A)
+var update = add("ed0d0662", content, false, {});
+// Hot Module Replacement
+if(false) {}
 
 /***/ }),
 
@@ -3847,20 +3861,6 @@ function applyToTag (styleElement, obj) {
     styleElement.appendChild(document.createTextNode(css))
   }
 }
-
-
-/***/ }),
-
-/***/ 554:
-/***/ ((module, exports, __webpack_require__) => {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(314);
-exports = ___CSS_LOADER_API_IMPORT___(false);
-// Module
-exports.push([module.id, "\n.t-vue-lbtn {\r\n    z-index: 100;\r\n    pointer-events: all;\r\n    cursor: pointer;\n}\r\n", ""]);
-// Exports
-module.exports = exports;
 
 
 /***/ }),
@@ -12115,12 +12115,12 @@ ButtonGroupvue_type_template_id_72b6dd45_render._withStripped = true;
 
 ;// ./src/components/ButtonGroup.vue?vue&type=template&id=72b6dd45
 
-;// ./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/LegendButton.vue?vue&type=template&id=7cd34a30
-var LegendButtonvue_type_template_id_7cd34a30_render = function render() {
+;// ./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/LegendButton.vue?vue&type=template&id=3efc519e
+var LegendButtonvue_type_template_id_3efc519e_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("img", {
-    staticClass: "t-vue-lbtn",
+    "class": "t-vue-lbtn-".concat(_vm.icon, "-").concat(_vm.ov),
     style: {
       width: _vm.config.L_BTN_SIZE + "px",
       height: _vm.config.L_BTN_SIZE + "px"
@@ -12134,10 +12134,10 @@ var LegendButtonvue_type_template_id_7cd34a30_render = function render() {
     }
   });
 };
-var LegendButtonvue_type_template_id_7cd34a30_staticRenderFns = [];
-LegendButtonvue_type_template_id_7cd34a30_render._withStripped = true;
+var LegendButtonvue_type_template_id_3efc519e_staticRenderFns = [];
+LegendButtonvue_type_template_id_3efc519e_render._withStripped = true;
 
-;// ./src/components/LegendButton.vue?vue&type=template&id=7cd34a30
+;// ./src/components/LegendButton.vue?vue&type=template&id=3efc519e
 
 ;// ./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/LegendButton.vue?vue&type=script&lang=js
 
@@ -12183,9 +12183,9 @@ LegendButtonvue_type_template_id_7cd34a30_render._withStripped = true;
 });
 ;// ./src/components/LegendButton.vue?vue&type=script&lang=js
  /* harmony default export */ const components_LegendButtonvue_type_script_lang_js = (LegendButtonvue_type_script_lang_js); 
-// EXTERNAL MODULE: ./node_modules/vue-style-loader/index.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/LegendButton.vue?vue&type=style&index=0&id=7cd34a30&prod&lang=css
-var LegendButtonvue_type_style_index_0_id_7cd34a30_prod_lang_css = __webpack_require__(179);
-;// ./src/components/LegendButton.vue?vue&type=style&index=0&id=7cd34a30&prod&lang=css
+// EXTERNAL MODULE: ./node_modules/vue-style-loader/index.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/LegendButton.vue?vue&type=style&index=0&id=3efc519e&prod&lang=css
+var LegendButtonvue_type_style_index_0_id_3efc519e_prod_lang_css = __webpack_require__(243);
+;// ./src/components/LegendButton.vue?vue&type=style&index=0&id=3efc519e&prod&lang=css
 
 ;// ./src/components/LegendButton.vue
 
@@ -12198,8 +12198,8 @@ var LegendButtonvue_type_style_index_0_id_7cd34a30_prod_lang_css = __webpack_req
 
 var LegendButton_component = normalizeComponent(
   components_LegendButtonvue_type_script_lang_js,
-  LegendButtonvue_type_template_id_7cd34a30_render,
-  LegendButtonvue_type_template_id_7cd34a30_staticRenderFns,
+  LegendButtonvue_type_template_id_3efc519e_render,
+  LegendButtonvue_type_template_id_3efc519e_staticRenderFns,
   false,
   null,
   null,
