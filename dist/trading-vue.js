@@ -5266,8 +5266,8 @@ function _toConsumableArray(r) {
   return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread();
 }
 
-;// ./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/Chart.vue?vue&type=template&id=bc555eca
-var Chartvue_type_template_id_bc555eca_render = function render() {
+;// ./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/loaders/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./src/components/Chart.vue?vue&type=template&id=3c6f8f9d
+var Chartvue_type_template_id_3c6f8f9d_render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c('div', {
@@ -5316,10 +5316,10 @@ var Chartvue_type_template_id_bc555eca_render = function render() {
     }
   }, 'botbar', _vm.botbar_props, false))], 2);
 };
-var Chartvue_type_template_id_bc555eca_staticRenderFns = [];
-Chartvue_type_template_id_bc555eca_render._withStripped = true;
+var Chartvue_type_template_id_3c6f8f9d_staticRenderFns = [];
+Chartvue_type_template_id_3c6f8f9d_render._withStripped = true;
 
-;// ./src/components/Chart.vue?vue&type=template&id=bc555eca
+;// ./src/components/Chart.vue?vue&type=template&id=3c6f8f9d
 
 ;// ./node_modules/@babel/runtime/helpers/esm/arrayWithHoles.js
 function _arrayWithHoles(r) {
@@ -13677,9 +13677,9 @@ var TI = /*#__PURE__*/function () {
     },
     cursor: {
       handler: function handler(newVal, p) {
-        // if (newVal.values[0]) {
-        //   this.$emit("updateSection", newVal.values[0]);
-        // }
+        if (newVal.values[0]) {
+          this.$emit("updateSection", newVal.values[0]);
+        }
         // if (newVal.mode) {
         //   this.$emit("updateCursorMode", newVal.mode);
         // }
@@ -14040,8 +14040,8 @@ var TI = /*#__PURE__*/function () {
 ;
 var Chart_component = normalizeComponent(
   components_Chartvue_type_script_lang_js,
-  Chartvue_type_template_id_bc555eca_render,
-  Chartvue_type_template_id_bc555eca_staticRenderFns,
+  Chartvue_type_template_id_3c6f8f9d_render,
+  Chartvue_type_template_id_3c6f8f9d_staticRenderFns,
   false,
   null,
   null,
