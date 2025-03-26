@@ -251,9 +251,9 @@ export default {
         if (newVal.values[0]) {
           this.$emit("updateSection", newVal.values[0]);
         }
-        // if (newVal.mode) {
-        //   this.$emit("updateCursorMode", newVal.mode);
-        // }
+        if (newVal.mode) {
+          this.$emit("updateCursorMode", newVal.mode);
+        }
       },
       deep: true
     },
