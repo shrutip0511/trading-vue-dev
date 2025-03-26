@@ -1,18 +1,6 @@
 <template>
   <!-- Horizontal section: (grid + sidebar) -->
    <div>
-  <title-chart-legend
-      ref="legend"
-      :values="section_values"
-      :decimalPlace="decimalPlace"
-      :legendDecimal="legendDecimal"
-      :grid_id="grid_id"
-      :common="legend_props"
-      :meta_props="get_meta_props"
-      :showTitleChartLegend="showTitleChartLegend"
-      @legend-button-click="button_click"
-    >
-    </title-chart-legend>
    
   <div class="trading-vue-section">
     <chart-legend
@@ -70,7 +58,6 @@
 import Grid from "./Grid.vue";
 import Sidebar from "./Sidebar.vue";
 import ChartLegend from "./Legend.vue";
-import TitleChartLegend from "./TitleLegend.vue";
 import Shaders from "../mixins/shaders.js";
 
 export default {
@@ -78,8 +65,7 @@ export default {
   components: {
     Grid,
     Sidebar,
-    ChartLegend,
-    TitleChartLegend
+    ChartLegend
   },
   mixins: [Shaders],
   props: ["common", "grid_id",'enableSideBarBoxValue', "enableZoom","decimalPlace","priceLine","enableCrosshair","applyShaders","ignore_OHLC","legendDecimal","tv_id","showTitleChartLegend","isOverlayCollapsed", "collpaseButton"],
