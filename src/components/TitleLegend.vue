@@ -1,7 +1,7 @@
 <template>
-    <div class="trading-vue-legend title-legend" :style="calc_style">
-        <div v-if="(grid_id === 0 && showTitleChartLegend)" class="trading-vue-ohlcv"
-            :style="{ 'max-width': common.width + 'px' }">
+    <div class="trading-vue-legend title-legend" >
+        <div v-if="(grid_id === 0)" class="trading-vue-ohlcv"
+            >
             <template v-if="common?.showLegendPropsData && common.showLegendPropsData.length">
                 <b v-for="(n, i) in common.showLegendPropsData" :key="i">{{ n.k }} : {{ n.v }}&nbsp;</b><br />
             </template>
@@ -10,7 +10,7 @@
             <span class="t-vue-title" v-if="!show_CustomProps" :style="{ color: common.colors.title }">
                 {{ common.title_txt }}
             </span>
-            <span class="t-vue-exchange">
+            <span class="t-vue-exchange" v-if="!show_CustomProps">
                 {{ common.exchange_txt }}
             </span>
             <span v-if="show_values && !show_CustomProps">
@@ -23,32 +23,21 @@
             <span v-if="!show_values" class="t-vue-lspan" :style="{ color: common.colors.text }">
                 {{ (common.meta.last || [])[4] }}
             </span>
-        </div>
+        </div> 
 
     </div>
 </template>
 <script>
 
-import ButtonGroup from './ButtonGroup.vue'
-import Spinner from './Spinner.vue'
-import LegendButton from "./LegendButton.vue";
-import Icons from '../stuff/icons.json'
-const settingPng = Icons['gear.png']
 export default {
-    name: 'TitleChartLegend',
-    components: { LegendButton, ButtonGroup, Spinner },
+    name: 'TitleLegendChart',
+    components: { },
     props: [
-        'common', 'values', 'decimalPlace', 'grid_id', 'meta_props', 'legendDecimal', 'showTitleChartLegend',
+        'common', 'values', 'decimalPlace', 'grid_id', 'meta_props', 'legendDecimal'
     ],
     computed: {
         show_CustomProps() {
             return this.common?.show_CustomProps || false;
-        },
-        show_Settings() {
-            return this.common?.showSettingsMain || false;
-        },
-        settingIcon() {
-            return settingPng
         },
         legendTxtConfig() {
             return this.common?.legendTxtConfig;
@@ -89,84 +78,17 @@ export default {
                 ]
             }
         },
-        // TODO: add support for { grid: { id : N }}
-        indicators() {
-            const values = this.$props.values
-            const f = this.format
-            var types = {}
-
-            return this.json_data.filter(
-                x => x.settings.legend !== false && !x.main
-            ).map(x => {
-                if (!(x.type in types)) types[x.type] = 0
-                const id = x.type + `_${types[x.type]++}`
-                return {
-                    v: 'display' in x.settings ? x.settings.display : true,
-                    name: x.name || id,
-                    index: (this.off_data || this.json_data).indexOf(x),
-                    id: id,
-                    values: values ? f(id, values) : this.n_a(1),
-                    unk: !(id in (this.$props.meta_props || {})),
-                    loading: x.loading,
-                    showLegendButtons: 'legendButtons' in x.settings ? x.settings.legendButtons : true
-                }
-            })
-        },
-        calc_style() {
-            let top = this.layout.height > 150 ? 3 : 1
-            let grids = this.$props.common.layout.grids
-            let w = grids[0] ? grids[0].width : undefined
-            return {
-                top: `${this.layout.offset + top}px`,
-                width: `${w - 20}px`
-            }
-        },
-        layout() {
-            const id = this.$props.grid_id
-            return this.$props.common.layout.grids[id]
-        },
-        json_data() {
-            return this.$props.common.data
-        },
-        off_data() {
-            return this.$props.common.offchart
-        },
         main_type() {
-            let f = this.common.data.find(x => x.main)
+            
+            let f = this.common.chartType
+            console.log("main_type", f);
             return f ? f.type : undefined
         },
         show_values() {
-            return this.common.cursor.mode !== 'explore'
+            return this.common.cursor_mode !== 'explore'
         }
     },
     methods: {
-        format(id, values) {
-            let meta = this.$props.meta_props[id] || {}
-            // Matches Overlay.data_colors with the data values
-            // (see Spline.vue)
-            if (!values[id]) return this.n_a(1)
-
-            // Custom formatter
-            if (meta.legend) return meta.legend(values[id])
-
-            return values[id].slice(1).map((x, i) => {
-                const cs = meta.data_colors ? meta.data_colors() : []
-                if (typeof x == 'number') {
-                    // Show 8 digits for small values
-                    x = x.toFixed(Math.abs(x) > 0.001 ? 4 : 8)
-                }
-                return {
-                    value: x,
-                    color: cs ? cs[i % cs.length] : undefined
-                }
-            })
-        },
-        n_a(len) {
-            return Array(len).fill({ value: 'n/a' })
-        },
-        button_click(event) {
-            this.$emit('legend-button-click', event)
-        }
     }
 }
 </script>
