@@ -223,12 +223,13 @@ function GridMaker(id, params, master_grid = null) {
         let mult_hi = dollar_mult_hi()
         let mult_lo_small = dollar_mult_lo_small()
         let mult_lo = dollar_mult_lo()
+        if (mult_lo == 1 && mult_lo > mult_hi) {
+            mult_lo = mult_lo_small
+        }
 
-        let mult = Math.max(mult_hi, mult_lo_small)
-        // if (mult == 1 && mult_lo > mult_hi) {
-        //     mult = dollar_mult_lo_small()
+        let mult = Math.max(mult_hi, mult_lo)
         console.log("mult_hi", mult_hi, "mult_lo_small", mult_lo_small, "mult_lo", mult_lo, "mult", mult);
-        // }
+        
         return mult
     }
 
