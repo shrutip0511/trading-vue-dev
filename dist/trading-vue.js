@@ -1,5 +1,5 @@
 /*!
- * TradingVue.JS - v1.0.3 - Mon Mar 17 2025
+ * TradingVue.JS - v1.0.3 - Tue Apr 08 2025
  *     https://github.com/tvjsx/trading-vue-js
  *     Copyright (c) 2019 C451 Code's All Right;
  *     Licensed under the MIT license
@@ -6314,7 +6314,13 @@ function GridMaker(id, params, master_grid) {
   function dollar_mult() {
     var mult_hi = dollar_mult_hi();
     var mult_lo = dollar_mult_lo();
-    return Math.max(mult_hi, mult_lo);
+    var diff = self.$_hi - self.$_lo;
+    if (mult_lo == 1 && diff < 5) {
+      var mult_lo_small = dollar_mult_lo_small();
+      mult_lo = mult_lo_small;
+    }
+    var mult = Math.max(mult_hi, mult_lo);
+    return mult;
   }
 
   // Price step multiplier (for the log-scale mode)
@@ -6335,6 +6341,33 @@ function GridMaker(id, params, master_grid) {
   function dollar_mult_lo() {
     var h = Math.min(height - self.B, height);
     if (h < $p.config.GRIDY) return 1;
+    var n = h / $p.config.GRIDY; // target grid N
+    var yrange = Math.abs(self.$_lo);
+    if (self.$_hi < 0 && self.$_lo < 0) {
+      var yratio = Math.abs(self.$_lo / self.$_hi);
+    } else {
+      yratio = Math.abs(self.$_lo) / 1;
+    }
+    var m = yrange * ($p.config.GRIDY / h);
+    var p = parseInt(yrange.toExponential().split('e')[1]);
+    return Math.pow(yratio, 1 / n);
+  }
+  function dollar_mult_lo_small() {
+    var h = Math.min(height - self.B, height);
+    if (h < $p.config.GRIDY) {
+      // Instead of returning 1, calculate a reasonable multiplier based on the data range
+      var _yrange = Math.abs(self.$_lo);
+      if (_yrange === 0) return 1.5; // Default multiplier if range is zero
+
+      // Calculate a reasonable multiplier based on the data range
+      var _n = Math.max(1, Math.floor(height / $p.config.GRIDY)); // Ensure at least 1 grid line
+      if (self.$_hi < 0 && self.$_lo < 0) {
+        var yratio = Math.abs(self.$_lo / self.$_hi);
+      } else {
+        yratio = Math.abs(self.$_lo) / 1;
+      }
+      return Math.max(1.2, Math.pow(yratio, 1 / _n)); // Ensure multiplier is at least 1.2
+    }
     var n = h / $p.config.GRIDY; // target grid N
     var yrange = Math.abs(self.$_lo);
     if (self.$_hi < 0 && self.$_lo < 0) {
@@ -6464,12 +6497,14 @@ function GridMaker(id, params, master_grid) {
     var y2 = search_start_neg(-v);
     var yp = -Infinity; // Previous y value
     var n = height / $p.config.GRIDY; // target grid N
-
+    var diff = self.$_hi - self.$_lo;
     var q = 1 + (self.$_mult - 1) / 2;
 
     // Over 0
     for (var y$ = y1; y$ > 0; y$ /= self.$_mult) {
-      y$ = log_rounder(y$, q);
+      if (diff > 5) {
+        y$ = log_rounder(y$, q);
+      }
       var y = Math.floor(math.log(y$) * self.A + self.B);
       self.ys.push([y, utils.strip(y$)]);
       if (y > height) break;
@@ -6481,7 +6516,9 @@ function GridMaker(id, params, master_grid) {
     // Under 0
     yp = Infinity;
     for (var y$ = y2; y$ < 0; y$ /= self.$_mult) {
-      y$ = log_rounder(y$, q);
+      if (diff > 5) {
+        y$ = log_rounder(y$, q);
+      }
       var _y = Math.floor(math.log(y$) * self.A + self.B);
       if (yp - _y < $p.config.GRIDY * 0.7) break;
       self.ys.push([_y, utils.strip(y$)]);
@@ -6491,28 +6528,6 @@ function GridMaker(id, params, master_grid) {
     }
 
     // TODO: remove lines near to 0
-  }
-  function grid_y_log_small() {
-    self.$_mult = dollar_mult();
-    self.ys = [];
-    if (!sub.length) return;
-    var safe_lo = Math.max(self.$_lo, 0.0001); // Ensure we don't get log(0)
-    var safe_hi = Math.max(self.$_hi, 0.0001);
-    var y$ = safe_hi;
-    var seenValues = new Set(); // To track unique values
-    var count = 0;
-    while (y$ >= safe_lo) {
-      var roundedValue = parseFloat(utils.strip(y$).toFixed($p.decimalPlace)); // Round to 3 decimal places
-
-      var y = Math.floor(math.log(y$) * self.A + self.B);
-      if (!seenValues.has(roundedValue)) {
-        self.ys.push([y, roundedValue]);
-        seenValues.add(roundedValue);
-      }
-      y$ /= self.$_mult;
-      count++;
-      if (y > height || self.ys.length > 50 || count > 100) break; // Prevent excessive iterations
-    }
   }
 
   // Search a start for the top grid so that
@@ -6583,11 +6598,7 @@ function GridMaker(id, params, master_grid) {
       calc_positions();
       grid_x();
       if (grid.logScale) {
-        if (self.$_hi < 1) {
-          grid_y_log_small();
-        } else {
-          grid_y_log();
-        }
+        grid_y_log();
       } else {
         grid_y();
       }
