@@ -6314,6 +6314,7 @@ function GridMaker(id, params, master_grid) {
   function dollar_mult() {
     var mult_hi = dollar_mult_hi();
     var mult_lo = dollar_mult_lo();
+    console.log("mult_hi", mult_hi, "mult_lo", mult_lo);
     return Math.max(mult_hi, mult_lo);
   }
 
@@ -6464,12 +6465,14 @@ function GridMaker(id, params, master_grid) {
     var y2 = search_start_neg(-v);
     var yp = -Infinity; // Previous y value
     var n = height / $p.config.GRIDY; // target grid N
-
+    var diff = self.$_hi - self.$_lo;
     var q = 1 + (self.$_mult - 1) / 2;
 
     // Over 0
     for (var y$ = y1; y$ > 0; y$ /= self.$_mult) {
-      y$ = log_rounder(y$, q);
+      if (diff > 5) {
+        y$ = log_rounder(y$, q);
+      }
       var y = Math.floor(math.log(y$) * self.A + self.B);
       self.ys.push([y, utils.strip(y$)]);
       if (y > height) break;
@@ -6481,7 +6484,9 @@ function GridMaker(id, params, master_grid) {
     // Under 0
     yp = Infinity;
     for (var y$ = y2; y$ < 0; y$ /= self.$_mult) {
-      y$ = log_rounder(y$, q);
+      if (diff > 5) {
+        y$ = log_rounder(y$, q);
+      }
       var _y = Math.floor(math.log(y$) * self.A + self.B);
       if (yp - _y < $p.config.GRIDY * 0.7) break;
       self.ys.push([_y, utils.strip(y$)]);
