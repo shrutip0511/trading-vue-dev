@@ -221,11 +221,13 @@ function GridMaker(id, params, master_grid = null) {
 
     function dollar_mult() {
         let mult_hi = dollar_mult_hi()
-        let mult_lo = dollar_mult_lo_small()
-        let mult = Math.max(mult_hi, mult_lo)
+        let mult_lo_small = dollar_mult_lo_small()
+        let mult_lo = dollar_mult_lo()
+
+        let mult = Math.max(mult_hi, mult_lo_small)
         // if (mult == 1 && mult_lo > mult_hi) {
         //     mult = dollar_mult_lo_small()
-            console.log("mult_hi", mult_hi, "mult_lo", mult_lo, "mult", mult);
+        console.log("mult_hi", mult_hi, "mult_lo_small", mult_lo_small, "mult_lo", mult_lo, "mult", mult);
         // }
         return mult
     }
@@ -269,7 +271,7 @@ function GridMaker(id, params, master_grid = null) {
             // Instead of returning 1, calculate a reasonable multiplier based on the data range
             let yrange = Math.abs(self.$_lo)
             if (yrange === 0) return 1.5 // Default multiplier if range is zero
-            
+
             // Calculate a reasonable multiplier based on the data range
             let n = Math.max(1, Math.floor(height / $p.config.GRIDY)) // Ensure at least 1 grid line
             if (self.$_hi < 0 && self.$_lo < 0) {
@@ -572,7 +574,7 @@ function GridMaker(id, params, master_grid = null) {
                 // if (self.$_hi < 1) {
                 //     grid_y_log_small()
                 // } else {
-                    grid_y_log()
+                grid_y_log()
                 // }
             } else {
                 grid_y()
