@@ -222,9 +222,12 @@ function GridMaker(id, params, master_grid = null) {
     function dollar_mult() {
         let mult_hi = dollar_mult_hi()
         let mult_lo = dollar_mult_lo()
-        console.log("mult_hi", mult_hi, "mult_lo", mult_lo);
-        
-        return Math.max(mult_hi, mult_lo)
+        let mult = Math.max(mult_hi, mult_lo)
+        if (mult == 1 && mult_lo > mult_hi) {
+            mult = dollar_mult_lo_small()
+            console.log("mult_hi", mult_hi, "mult_lo", mult_lo, "mult", mult);
+        }
+        return mult
     }
 
     // Price step multiplier (for the log-scale mode)
@@ -248,6 +251,34 @@ function GridMaker(id, params, master_grid = null) {
 
         let h = Math.min(height - self.B, height)
         if (h < $p.config.GRIDY) return 1
+        let n = h / $p.config.GRIDY // target grid N
+        let yrange = Math.abs(self.$_lo)
+        if (self.$_hi < 0 && self.$_lo < 0) {
+            var yratio = Math.abs(self.$_lo / self.$_hi)
+        } else {
+            yratio = Math.abs(self.$_lo) / 1
+        }
+        let m = yrange * ($p.config.GRIDY / h)
+        let p = parseInt(yrange.toExponential().split('e')[1])
+        return Math.pow(yratio, 1 / n)
+    }
+    function dollar_mult_lo_small() {
+
+        let h = Math.min(height - self.B, height)
+        if (h < $p.config.GRIDY) {
+            // Instead of returning 1, calculate a reasonable multiplier based on the data range
+            let yrange = Math.abs(self.$_lo)
+            if (yrange === 0) return 1.5 // Default multiplier if range is zero
+            
+            // Calculate a reasonable multiplier based on the data range
+            let n = Math.max(1, Math.floor(height / $p.config.GRIDY)) // Ensure at least 1 grid line
+            if (self.$_hi < 0 && self.$_lo < 0) {
+                var yratio = Math.abs(self.$_lo / self.$_hi)
+            } else {
+                yratio = Math.abs(self.$_lo) / 1
+            }
+            return Math.max(1.2, Math.pow(yratio, 1 / n)) // Ensure multiplier is at least 1.2
+        }
         let n = h / $p.config.GRIDY // target grid N
         let yrange = Math.abs(self.$_lo)
         if (self.$_hi < 0 && self.$_lo < 0) {
