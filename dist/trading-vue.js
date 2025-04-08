@@ -6317,7 +6317,7 @@ function GridMaker(id, params, master_grid) {
     var mult = Math.max(mult_hi, mult_lo);
     // if (mult == 1 && mult_lo > mult_hi) {
     //     mult = dollar_mult_lo_small()
-    //     console.log("mult_hi", mult_hi, "mult_lo", mult_lo, "mult", mult);
+    console.log("mult_hi", mult_hi, "mult_lo", mult_lo, "mult", mult);
     // }
     return mult;
   }
