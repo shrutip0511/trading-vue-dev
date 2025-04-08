@@ -245,7 +245,20 @@ function GridMaker(id, params, master_grid = null) {
     function dollar_mult_lo() {
 
         let h = Math.min(height - self.B, height)
-        if (h < $p.config.GRIDY) return 1
+        if (h < $p.config.GRIDY) {
+            // Instead of returning 1, calculate a reasonable multiplier based on the data range
+            let yrange = Math.abs(self.$_lo)
+            if (yrange === 0) return 1.5 // Default multiplier if range is zero
+            
+            // Calculate a reasonable multiplier based on the data range
+            let n = Math.max(1, Math.floor(height / $p.config.GRIDY)) // Ensure at least 1 grid line
+            if (self.$_hi < 0 && self.$_lo < 0) {
+                var yratio = Math.abs(self.$_lo / self.$_hi)
+            } else {
+                yratio = Math.abs(self.$_lo) / 1
+            }
+            return Math.max(1.2, Math.pow(yratio, 1 / n)) // Ensure multiplier is at least 1.2
+        }
         let n = h / $p.config.GRIDY // target grid N
         let yrange = Math.abs(self.$_lo)
         if (self.$_hi < 0 && self.$_lo < 0) {
@@ -410,12 +423,14 @@ function GridMaker(id, params, master_grid = null) {
         let y2 = search_start_neg(-v)
         let yp = -Infinity // Previous y value
         let n = height / $p.config.GRIDY // target grid N
-
+        let diff = self.$_hi - self.$_lo
         let q = 1 + (self.$_mult - 1) / 2
 
         // Over 0
         for (var y$ = y1; y$ > 0; y$ /= self.$_mult) {
-            y$ = log_rounder(y$, q)
+            if (diff > 5) {
+                y$ = log_rounder(y$, q)
+            }
             let y = Math.floor(math.log(y$) * self.A + self.B)
             self.ys.push([y, Utils.strip(y$)])
             if (y > height) break
@@ -427,7 +442,9 @@ function GridMaker(id, params, master_grid = null) {
         // Under 0
         yp = Infinity
         for (var y$ = y2; y$ < 0; y$ /= self.$_mult) {
-            y$ = log_rounder(y$, q)
+            if (diff > 5) {
+                y$ = log_rounder(y$, q)
+            }
             let y = Math.floor(math.log(y$) * self.A + self.B)
             if (yp - y < $p.config.GRIDY * 0.7) break
             self.ys.push([y, Utils.strip(y$)])
@@ -437,7 +454,6 @@ function GridMaker(id, params, master_grid = null) {
         }
 
         // TODO: remove lines near to 0
-
     }
 
     function grid_y_log_small() {
@@ -532,11 +548,11 @@ function GridMaker(id, params, master_grid = null) {
             calc_positions()
             grid_x()
             if (grid.logScale) {
-                if (self.$_hi < 1) {
-                    grid_y_log_small()
-                } else {
-                    grid_y_log()
-                }
+                // if (self.$_hi < 1) {
+                //     grid_y_log_small()
+                // } else {
+                grid_y_log()
+                // }
             } else {
                 grid_y()
             }
