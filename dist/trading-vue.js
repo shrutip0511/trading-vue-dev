@@ -6583,11 +6583,11 @@ function GridMaker(id, params, master_grid) {
       calc_positions();
       grid_x();
       if (grid.logScale) {
-        if (self.$_hi < 1) {
-          grid_y_log_small();
-        } else {
-          grid_y_log();
-        }
+        // if (self.$_hi < 1) {
+        //     grid_y_log_small()
+        // } else {
+        grid_y_log();
+        // }
       } else {
         grid_y();
       }
