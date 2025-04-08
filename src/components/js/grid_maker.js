@@ -223,8 +223,9 @@ function GridMaker(id, params, master_grid = null) {
         let mult_hi = dollar_mult_hi()
         let mult_lo_small = dollar_mult_lo_small()
         let mult_lo = dollar_mult_lo()
+        let diff = self.$_hi - self.$_lo
         console.log("mult_hi", mult_hi, "mult_lo_small", mult_lo_small, "mult_lo", mult_lo, "diff", self.$_hi - self.$_lo);
-        if (mult_lo == 1 && mult_lo > mult_hi) {
+        if (mult_lo == 1 && diff < 5) {
             mult_lo = mult_lo_small
         }
 
