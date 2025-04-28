@@ -6884,6 +6884,7 @@ var CursorUpdater = /*#__PURE__*/function () {
       // grid: { id: N }
       this.cursor.grid_id = e.grid_id;
       var once = true;
+      console.log("sync called");
       var _iterator = updater_createForOfIteratorHelper(this.grids),
         _step;
       try {

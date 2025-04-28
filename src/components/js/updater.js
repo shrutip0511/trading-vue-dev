@@ -15,6 +15,8 @@ class CursorUpdater {
         // grid: { id: N }
         this.cursor.grid_id = e.grid_id
         let once = true
+        console.log("sync called");
+        
         for (var grid of this.grids) {
             const c = this.cursor_data(grid, e)
             if (!this.cursor.locked) {
