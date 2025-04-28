@@ -7,7 +7,7 @@ class CursorUpdater {
 
     constructor(comp) {
         this.comp = comp, this.grids = comp._layout.grids,
-        this.cursor = comp.cursor
+            this.cursor = comp.cursor
     }
 
     sync(e) {
@@ -15,6 +15,8 @@ class CursorUpdater {
         // grid: { id: N }
         this.cursor.grid_id = e.grid_id
         let once = true
+        console.log("sync called");
+        
         for (var grid of this.grids) {
             const c = this.cursor_data(grid, e)
             if (!this.cursor.locked) {
@@ -23,7 +25,7 @@ class CursorUpdater {
                     this.cursor.t = this.cursor_time(grid, e, c)
                     if (this.cursor.t) once = false
                 }
-                if(c.values) {
+                if (c.values) {
                     this.comp.$set(this.cursor.values, grid.id, c.values)
                 }
             }
@@ -68,6 +70,7 @@ class CursorUpdater {
         let xs = data.map(x => grid.t2screen(x[0]) + 0.5)
         let i = Utils.nearest_a(e.x, xs)[0]
         if (!xs[i]) return {}
+        console.log("cursor_data", data, xs);
         return {
             x: Math.floor(xs[i]) - 0.5,
             y: Math.floor(e.y - 2) - 0.5 - grid.offset,
@@ -76,7 +79,7 @@ class CursorUpdater {
             values: Object.assign({
                 ohlcv: grid.id === 0 ? data[i] : undefined
             },
-            this.overlay_data(grid, e))
+                this.overlay_data(grid, e))
         }
     }
 
