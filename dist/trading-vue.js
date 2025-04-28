@@ -6963,7 +6963,7 @@ var CursorUpdater = /*#__PURE__*/function () {
       });
       var i = utils.nearest_a(e.x, xs)[0];
       if (!xs[i]) return {};
-      console.log("cursor_data", data, xs);
+      console.log("cursor_data", e.x, Math.floor(xs[i]) - 0.5);
       return {
         x: Math.floor(xs[i]) - 0.5,
         y: Math.floor(e.y - 2) - 0.5 - grid.offset,
