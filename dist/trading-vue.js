@@ -6884,13 +6884,13 @@ var CursorUpdater = /*#__PURE__*/function () {
       // grid: { id: N }
       this.cursor.grid_id = e.grid_id;
       var once = true;
-      console.log("sync called");
       var _iterator = updater_createForOfIteratorHelper(this.grids),
         _step;
       try {
         for (_iterator.s(); !(_step = _iterator.n()).done;) {
           var grid = _step.value;
           var c = this.cursor_data(grid, e);
+          console.log("cursor_data got", c);
           if (!this.cursor.locked) {
             // TODO: find a better fix to invisible cursor prob
             if (once) {
@@ -6964,9 +6964,9 @@ var CursorUpdater = /*#__PURE__*/function () {
       });
       var i = utils.nearest_a(e.x, xs)[0];
       if (!xs[i]) return {};
-      console.log("cursor_data", e.x, Math.floor(xs[i]) - 0.5);
+      // console.log("cursor_data", e.x, Math.floor(xs[i]) - 0.5);
       return {
-        $x: e.x,
+        $x: Math.floor(e.x),
         x: Math.floor(xs[i]) - 0.5,
         y: Math.floor(e.y - 2) - 0.5 - grid.offset,
         y$: grid.screen2$(e.y - 2 - grid.offset),
