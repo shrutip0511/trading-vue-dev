@@ -33,6 +33,7 @@ class CursorUpdater {
             this.cursor.x = grid.t2screen(this.cursor.t)
             this.cursor.y = c.y
             this.cursor.y$ = c.y$
+            this.cursor.$x = c.$x
         }
     }
 
