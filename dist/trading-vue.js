@@ -6965,6 +6965,7 @@ var CursorUpdater = /*#__PURE__*/function () {
       if (!xs[i]) return {};
       console.log("cursor_data", e.x, Math.floor(xs[i]) - 0.5);
       return {
+        $x: e.x,
         x: Math.floor(xs[i]) - 0.5,
         y: Math.floor(e.y - 2) - 0.5 - grid.offset,
         y$: grid.screen2$(e.y - 2 - grid.offset),

@@ -16,7 +16,7 @@ class CursorUpdater {
         this.cursor.grid_id = e.grid_id
         let once = true
         console.log("sync called");
-        
+
         for (var grid of this.grids) {
             const c = this.cursor_data(grid, e)
             if (!this.cursor.locked) {
@@ -70,8 +70,9 @@ class CursorUpdater {
         let xs = data.map(x => grid.t2screen(x[0]) + 0.5)
         let i = Utils.nearest_a(e.x, xs)[0]
         if (!xs[i]) return {}
-        console.log("cursor_data", e.x,Math.floor(xs[i]) - 0.5 );
+        console.log("cursor_data", e.x, Math.floor(xs[i]) - 0.5);
         return {
+            $x: e.x,
             x: Math.floor(xs[i]) - 0.5,
             y: Math.floor(e.y - 2) - 0.5 - grid.offset,
             y$: grid.screen2$(e.y - 2 - grid.offset),
